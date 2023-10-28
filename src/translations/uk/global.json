@@ -1,0 +1,28 @@
+{
+  "header": {
+    "signIn": "Війти",
+    "signUp": "Зареєструватися"
+  },
+  "signIn": {
+    "title": "Війти",
+    "underline": "Ще не маєте аккаунту? ",
+    "link": "Створити аккаунт"
+  },
+  "signUp": {
+    "title": "Зареєструватися",
+    "underline": "Вже маєте аккаунт? ",
+    "link": "Вхід"
+  },
+  "firstName": "Ім'я",
+  "firstNamePlaceholder": "Ваше ім'я",
+  "lastName": "Прізвище",
+  "lastNamePlaceholder": "Ваше прізвище",
+  "email": "Електронна пошта",
+  "emailPlaceholder": "e.g. example@email.com",
+  "password": "Пароль",
+  "passwordPlaceholder": "Хочаб 8 символів",
+  "emptyFieldError": "Поле не може бути порожнім",
+  "invalidFormatError": "Невірний формат",
+  "lettersError": "Тільки букви",
+  "passwordLengthError": "Пароль повинен містити щонайменш 8 символів"
+}

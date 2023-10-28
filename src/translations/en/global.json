@@ -1,0 +1,28 @@
+{
+  "header": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
+  },
+  "signIn": {
+    "title": "Sign In",
+    "underline": "Don’t have an account? ",
+    "link": "Create account"
+  },
+  "signUp": {
+    "title": "Sign Up",
+    "underline": "Already have an account? ",
+    "link": "Login"
+  },
+  "firstName": "First name",
+  "firstNamePlaceholder": "Your first name",
+  "lastName": "Last name",
+  "lastNamePlaceholder": "Your last name",
+  "email": "Email address",
+  "emailPlaceholder": "e.g. example@email.com",
+  "password": "Password",
+  "passwordPlaceholder": "At least 8 characters",
+  "emptyFieldError": "Field cannot be empty",
+  "invalidFormatError": "Invalid Format",
+  "lettersError": "Only letters",
+  "passwordLengthError": "Password must be at least 8 characters"
+}

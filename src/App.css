@@ -1,0 +1,40 @@
+.heading-m {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.heading-s {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.heading-xs {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.body-text-m {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.body-text-s {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.button-primary {
+  background-color: var(--color-light-purple);
+  color: var(--color-white);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.button-primary:hover {
+  box-shadow: var(--shadow-hover);
+  background-color: var(--color-hover-purple);
+}
+
+.button-primary:disabled {
+  opacity: 0.25;
+}
