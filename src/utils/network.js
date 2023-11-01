@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosAPI = axios.create({
-  baseURL: 'http://ec2-13-49-65-35.eu-north-1.compute.amazonaws.com/api',
+  baseURL: 'http://ec2-51-20-76-32.eu-north-1.compute.amazonaws.com/api',
 });
 
 axiosAPI.interceptors.request.use((config) => {
