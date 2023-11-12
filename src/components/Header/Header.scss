@@ -1,0 +1,25 @@
+.menu-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  transition: background-color 0.3s ease-in-out;
+  
+  &.wide {
+    min-width: 140px;
+  }
+
+  &:hover {
+    background-color: var(--color-theme-lines);
+  }
+}
+
+.button {
+  padding: 6px;
+  border-radius: 8px;
+  transition: border 0s, background-color var(--duration) ease-in-out;
+
+  &:hover {
+    background-color: var(--color-theme-lines);
+  }
+}
