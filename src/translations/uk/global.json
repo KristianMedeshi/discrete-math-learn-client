@@ -13,6 +13,19 @@
     "underline": "Вже маєте аккаунт? ",
     "link": "Вхід"
   },
+  "forum": {
+    "yourQuestion": "Ваше питання",
+    "title": "Заголовок",
+    "details": "Деталі",
+    "questions": "Питання",
+    "askQuestion": "Задати питання",
+    "titlePlaceholder": "Задайде ваше питання",
+    "detailsPlaceholder": "Розпишіть ваше питання детальніше",
+    "answerPlaceholder": "Напишіть свою відповідь",
+    "tags": "Теги",
+    "tagsMessage": "Додайте не більше 5 тегів",
+    "done": "Готово"
+  },
   "firstName": "Ім'я",
   "firstNamePlaceholder": "Ваше ім'я",
   "lastName": "Прізвище",
