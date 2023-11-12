@@ -3,8 +3,10 @@
   --color-hover-purple: #beadff;
   --color-light-purple: #633cff;
   --color-white: #ffffff;
+  --color-black: #000000;
   --color-light-grey: #f4f7fd;
-  --color-lines: #e4ebfa;
+  --color-lines-light: #d1d7dc; /*#e4ebfa;*/
+  --color-lines-dark: #3e3f4e;
   --color-borders: #cfcfcf;
   --color-red: #ff3939;
   --shadow-hover: 0 0 24px 0 rgba(99, 60, 255, 0.2);
@@ -13,6 +15,17 @@
   --color-dark-grey: #20212c;
   --color-theme-primary: var(--color-white);
   --color-theme-secondary: var(--color-light-grey);
+  --color-text: var(--color-black);
+  --color-theme-lines: var(--color-lines-light);
+}
+
+* {
+  --duration: 0.25s;
+  transition: 
+    background-color var(--duration) ease-in-out, 
+    color var(--duration) ease-in-out, 
+    border var(--duration) ease-in-out,
+    box-shadow var(--duration) ease-in-out;
 }
 
 body {
@@ -21,52 +34,30 @@ body {
   /* font-family: 'Roboto', sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--color-text);
   background: var(--color-theme-secondary);
+}
+
+.dark {
+  --color-text: var(--color-white);
+  --color-lines: var(--color-lines-dark);
+  --color-theme-primary: var(--color-very-dark-grey-bg);
+  --color-theme-secondary: var(--color-dark-grey);
+  --color-theme-lines: var(--color-lines-dark);
 }
 
 input {
   outline: 0 !important;
   background: transparent !important;
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
-label {
-  user-select: none;
-}
-
-.label-borders {
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--color-borders);
-  border-radius: 8px;
-  padding: 10px;
-  transition: var(--transition-param);
-}
-
-.label-borders:hover {
-  border-width: 1px;
-  padding: 10px;
-  border-color: var(--color-purple);
-  cursor: pointer;
-}
-
-.label-borders:focus-within {
-  border-width: 1px;
-  padding: 10px;
-  border-color: var(--color-purple);
-  box-shadow: var(--shadow-hover);
+textarea {
+  outline: 0 !important;
+  background: transparent !important;
+  /* cursor: pointer; */
 }
 
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
-.body-text-m {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.body-text-s {
-  font-size: 12px;
-  font-weight: 400;
-}

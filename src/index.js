@@ -1,15 +1,17 @@
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import i18next from 'i18next';
-
-import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-
 import globalEn from './translations/en/global.json';
 import globalUk from './translations/uk/global.json';
+import tagsEn from './translations/en/tags.json';
+import tagsUk from './translations/uk/tags.json';
+import store from './store';
+import reportWebVitals from './reportWebVitals';
+import './index.css';
 
 i18next.init({
   interpolation: { escapeValue: true },
@@ -17,19 +19,27 @@ i18next.init({
   resources: {
     en: {
       global: globalEn,
+      tags: tagsEn,
     },
     uk: {
       global: globalUk,
+      tags: tagsUk,
     },
   },
 });
 
+const queryClient = new QueryClient();
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <I18nextProvider i18n={i18next}>
-      <App />
-    </I18nextProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <I18nextProvider i18n={i18next}>
+          <App />
+        </I18nextProvider>
+      </QueryClientProvider>
+    </Provider>
   </React.StrictMode>,
 );
 
