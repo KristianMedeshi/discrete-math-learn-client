@@ -1,0 +1,9 @@
+.tagsLabel {
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.tagsLabel::-webkit-scrollbar {
+  display: none;
+}
