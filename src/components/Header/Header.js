@@ -6,7 +6,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { MdOutlineForum } from 'react-icons/md';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsAuthorized } from '../../store/authSlice';
+import { setLoggedIn } from '../../store/authSlice';
 import './Header.scss';
 
 function Header() {
@@ -17,7 +17,7 @@ function Header() {
   const langMenuRef = useRef(null);
   const [isShownUserMenu, setIsShownUserMenu] = useState(false);
   const userMenuRef = useRef(null);
-  const isAuthorized = useSelector((store) => store.auth.isAuthorized);
+  const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
   const [isLightTheme, setLightTheme] = useState(localStorage.getItem('theme') === 'light');
 
   const handleChangeLanguage = (lang) => {
@@ -26,7 +26,8 @@ function Header() {
   };
 
   const handleLogout = () => {
-    dispatch(setIsAuthorized(false));
+    localStorage.removeItem('token');
+    dispatch(setLoggedIn(false));
     navigate('/sign-in');
   };
 
@@ -98,7 +99,7 @@ function Header() {
             <p>uk</p>
           </button>
         </div>
-        {isAuthorized ? (
+        {isLoggedIn ? (
           <>
             <Link to="forum" className="button">
               <MdOutlineForum size={22} />
