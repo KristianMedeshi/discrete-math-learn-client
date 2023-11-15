@@ -15,7 +15,7 @@ function AskQuestion() {
   } = useForm({
     shouldFocusError: false,
     defaultValues: {
-      details: '',
+      description: '',
       tags: [],
     },
   });
@@ -63,18 +63,18 @@ function AskQuestion() {
           })}
         />
         <div className="flex flex-col gap-1 w-full">
-          <small className={`body-text-s ${errors.details ? '!text-red' : ''}`}>
-            {t('forum.details')}
+          <small className={`body-text-s ${errors.description ? '!text-red' : ''}`}>
+            {t('forum.description')}
             :
           </small>
           <RichEditor
-            placeholder={t('forum.detailsPlaceholder')}
-            value={() => getValues('details')}
-            onChange={(value) => setValue('details', value)}
+            placeholder={t('forum.descriptionPlaceholder')}
+            value={() => getValues('description')}
+            onChange={(value) => setValue('description', value)}
           />
         </div>
         <div className="flex flex-col gap-1 w-full">
-          <small className={`body-text-s ${errors.details ? '!text-red' : ''}`}>
+          <small className={`body-text-s ${errors.tags ? '!text-red' : ''}`}>
             {t('forum.tags')}
             :
           </small>

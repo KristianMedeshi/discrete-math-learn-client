@@ -29,7 +29,7 @@ function Forum() {
               className="p-4 rounded-md bg-secondary outline-lightPurple outline-1 hover:outline"
             >
               <h2 className="heading-xs">{question.title}</h2>
-              <p className="flex gap-2 justify-between">
+              <div className="flex gap-2 justify-between">
                 <div className="flex gap-2">
                   {question.tags?.map((tag) => (
                     <div
@@ -47,7 +47,7 @@ function Forum() {
                   {' '}
                   {formatDate(question.createdAt, i18n)}
                 </span>
-              </p>
+              </div>
             </Link>
           ))}
         </div>

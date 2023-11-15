@@ -16,11 +16,11 @@
   "forum": {
     "yourQuestion": "Ваше питання",
     "title": "Заголовок",
-    "details": "Деталі",
+    "description": "Деталі",
     "questions": "Питання",
     "askQuestion": "Задати питання",
     "titlePlaceholder": "Задайде ваше питання",
-    "detailsPlaceholder": "Розпишіть ваше питання детальніше",
+    "descriptionPlaceholder": "Розпишіть ваше питання детальніше",
     "answerPlaceholder": "Напишіть свою відповідь",
     "tags": "Теги",
     "tagsMessage": "Додайте не більше 5 тегів",

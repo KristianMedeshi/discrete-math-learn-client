@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   AiOutlineMail, AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible,
 } from 'react-icons/ai';
@@ -16,8 +16,12 @@ function SignUp() {
   const { register, formState: { errors }, handleSubmit } = useForm({ shouldFocusError: false });
   const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
   const lettersPattern = /[а-яА-Яa-zA-Z]/g;
+  const navigate = useNavigate();
 
   const signUpMutation = useMutation(signUp, {
+    onSuccess: () => {
+      navigate('/sign-in');
+    },
     onError: (error) => {
       if (error.response) {
         setAuthError(error.response.data.error);

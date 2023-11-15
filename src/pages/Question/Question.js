@@ -13,7 +13,8 @@ function Question() {
   const [t, i18n] = useTranslation('global');
   const { questionId } = useParams();
   const { data, isLoading } = useQuery(questionId, () => getQuestion(questionId));
-  const { question, answers } = data || {};
+  const { question } = data || {};
+  const answers = question?.details.answers;
   const {
     setValue, getValues, handleSubmit,
   } = useForm({
@@ -24,8 +25,8 @@ function Question() {
   });
 
   const queryClient = useQueryClient();
-  const postAnswerMutation = useMutation((postData) => {
-    createAnswer(data.question.answers, postData);
+  const postAnswerMutation = useMutation(async (postData) => {
+    await createAnswer(questionId, postData);
   }, {
     onSuccess: () => {
       queryClient.invalidateQueries(questionId);
@@ -44,7 +45,7 @@ function Question() {
   return (
     <PageWrapper>
       <h1 className="heading-m">{question?.title}</h1>
-      {question?.details && parse(question.details)}
+      {question?.description && parse(question.description)}
       <div className="divider" />
       <div className="flex flex-col gap-5">
         <form

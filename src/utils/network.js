@@ -14,7 +14,7 @@ axiosAPI.interceptors.request.use((config) => {
 
 export const signUp = async (data) => {
   try {
-    const response = await axiosAPI.post('/users/sign-up', data, {
+    const response = await axiosAPI.post('/sign-up', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -28,7 +28,7 @@ export const signUp = async (data) => {
 
 export const signIn = async (data) => {
   try {
-    const response = await axiosAPI.post('/users/sign-in', data, {
+    const response = await axiosAPI.post('/sign-in', data, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -74,9 +74,9 @@ export const getQuestion = async (questionId) => {
   }
 };
 
-export const createAnswer = async (answersId, data) => {
+export const createAnswer = async (id, data) => {
   try {
-    const response = await axiosAPI.post(`/forum/${answersId}`, data, {
+    const response = await axiosAPI.post(`/forum/${id}`, data, {
       headers: {
         'Content-Type': 'application/json',
       },

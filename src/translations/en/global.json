@@ -16,11 +16,11 @@
   "forum": {
     "yourQuestion": "Your Question",
     "title": "Title",
-    "details": "Details",
+    "description": "Description",
     "questions": "Questions",
     "askQuestion": "Ask Question",
     "titlePlaceholder": "Ask your question",
-    "detailsPlaceholder": "Describe your question in details",
+    "descriptionPlaceholder": "Describe your question in details",
     "answerPlaceholder": "Write your answer",
     "tags": "Tags",
     "tagsMessage": "Add up to 5 tags",
