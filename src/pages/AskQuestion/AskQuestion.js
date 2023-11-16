@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQueryClient } from 'react-query';
+import { useEffect } from 'react';
 import Field from '../../components/Field';
 import PageWrapper from '../../components/PageWrapper';
 import RichEditor from '../../components/RichEditor';
@@ -14,11 +15,11 @@ function AskQuestion() {
     setValue, getValues, control, register, formState: { errors }, handleSubmit,
   } = useForm({
     shouldFocusError: false,
-    defaultValues: {
-      description: '',
-      tags: [],
-    },
   });
+
+  useEffect(() => {
+    setValue('tags', []);
+  }, []);
   const currentTags = useWatch({ control, name: 'tags' });
 
   const handleSelectTag = (tag) => {

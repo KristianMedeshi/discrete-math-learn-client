@@ -47,19 +47,36 @@
   transition: all var(--duration) ease-in-out;
 }
 
-.uk .ql-picker.ql-size .ql-picker-label::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+/* .en.quill .ql-picker.ql-size .ql-picker-label::before,
+.en.quill .ql-snow .ql-picker.ql-size .ql-picker-item::before {
+  content: 'Normal' ;
+}
+.en.quill .ql-picker.ql-size .ql-picker-label[data-value=small]::before,
+.en.quill .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
+  content: 'Small' !important;
+}
+.en.ql-picker.ql-size .ql-picker-label[data-value=large]::before,
+.en.quill .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
+  content: 'Large' !important;
+}
+.en.quill .ql-picker.ql-size .ql-picker-label[data-value=huge]::before,
+.en.quill .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
+  content: 'Huge' !important;
+} */
+
+.uk.quill .ql-picker.ql-size .ql-picker-label::before,
+.uk.quill .ql-snow .ql-picker.ql-size .ql-picker-item::before {
   content: 'Нормальний' !important;
 }
-.uk .ql-picker.ql-size .ql-picker-label[data-value=small]::before,
-.ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
+.uk.quill .ql-picker.ql-size .ql-picker-label[data-value=small]::before,
+.uk.quill .ql-snow .ql-picker.ql-size .ql-picker-item[data-value=small]::before {
   content: 'Малий' !important;
 }
-.uk .ql-picker.ql-size .ql-picker-label[data-value=large]::before,
-.uk .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
+.uk.quill .ql-picker.ql-size .ql-picker-label[data-value=large]::before,
+.uk.quill .ql-picker.ql-size .ql-picker-item[data-value=large]::before {
   content: 'Великий' !important;
 }
-.uk .ql-picker.ql-size .ql-picker-label[data-value=huge]::before,
-.uk .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
+.uk.quill .ql-picker.ql-size .ql-picker-label[data-value=huge]::before,
+.uk.quill .ql-picker.ql-size .ql-picker-item[data-value=huge]::before {
   content: 'Величезний' !important;
 }

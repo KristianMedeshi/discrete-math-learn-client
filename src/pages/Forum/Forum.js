@@ -8,6 +8,7 @@ import formatDate from '../../utils/date';
 
 function Forum() {
   const [t, i18n] = useTranslation('global');
+  const [tTags] = useTranslation('tags');
   const { data: questions, isLoading } = useQuery('questions', getQuestions);
 
   if (isLoading) {
@@ -36,8 +37,7 @@ function Forum() {
                       key={tag}
                       className="bg-lines px-2 py-1 rounded-sm whitespace-nowrap h-fit"
                     >
-                      {tag}
-
+                      {tTags(`${tag}`)}
                     </div>
                   ))}
                 </div>

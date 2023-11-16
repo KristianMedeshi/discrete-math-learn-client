@@ -46,8 +46,8 @@ function SignUp() {
             name={t('firstName')}
             type="text"
             placeholder={t('firstNamePlaceholder')}
-            error={errors.firstName}
-            registerReturn={register('firstName', {
+            error={errors?.name?.first}
+            registerReturn={register('name.first', {
               required: t('emptyFieldError'),
               pattern: {
                 value: lettersPattern,
@@ -59,8 +59,8 @@ function SignUp() {
             name={t('lastName')}
             type="text"
             placeholder={t('lastNamePlaceholder')}
-            error={errors.lastName}
-            registerReturn={register('lastName', {
+            error={errors?.name?.last}
+            registerReturn={register('name.last', {
               required: t('emptyFieldError'),
               pattern: {
                 value: lettersPattern,

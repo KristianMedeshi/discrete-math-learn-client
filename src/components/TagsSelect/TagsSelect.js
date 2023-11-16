@@ -55,7 +55,7 @@ function TagsSelect({ tags, onSelect, onRemove }) {
           onFocus={openDropDown}
           onChange={handleInputChange}
           placeholder={tGlobal('forum.tagsMessage')}
-          hidden={tags.length >= 5}
+          hidden={tags?.length >= 5}
         />
       </label>
       <ul

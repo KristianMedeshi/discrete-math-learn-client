@@ -13,8 +13,7 @@ function Question() {
   const [t, i18n] = useTranslation('global');
   const { questionId } = useParams();
   const { data, isLoading } = useQuery(questionId, () => getQuestion(questionId));
-  const { question } = data || {};
-  const answers = question?.details.answers;
+  const { question, answers } = data || {};
   const {
     setValue, getValues, handleSubmit,
   } = useForm({
