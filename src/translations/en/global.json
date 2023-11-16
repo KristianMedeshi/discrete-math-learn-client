@@ -37,5 +37,5 @@
   "emptyFieldError": "Field cannot be empty",
   "invalidFormatError": "Invalid Format",
   "lettersError": "Only letters",
-  "passwordLengthError": "Password must be at least 8 characters"
+  "passwordError": "Password must be at least 8 characters long and contain at least one digit, one lowercase, and one uppercase letter."
 }

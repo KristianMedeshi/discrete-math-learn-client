@@ -15,6 +15,7 @@ function SignUp() {
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const { register, formState: { errors }, handleSubmit } = useForm({ shouldFocusError: false });
   const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+  const passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/i;
   const lettersPattern = /[а-яА-Яa-zA-Z]/g;
   const navigate = useNavigate();
 
@@ -92,9 +93,9 @@ function SignUp() {
             error={errors.password}
             registerReturn={register('password', {
               required: t('emptyFieldError'),
-              minLength: {
-                value: 8,
-                message: t('passwordLengthError'),
+              pattern: {
+                value: passwordPattern,
+                message: t('passwordError'),
               },
             })}
             after={isVisiblePassword

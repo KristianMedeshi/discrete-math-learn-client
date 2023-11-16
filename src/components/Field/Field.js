@@ -30,7 +30,7 @@ function Field({
         />
         <div className="ml-auto">{after}</div>
       </label>
-      <span className="body-text-s !text-red whitespace-nowrap h-[8px]">
+      <span className="body-text-s !text-red h-[8px]">
         {error?.message}
         {' '}
       </span>
