@@ -83,7 +83,18 @@ export const createAnswer = async (id, data) => {
     });
     return response?.data;
   } catch (error) {
-    console.error('Post answer error:', error);
+    console.error('Upload error:', error);
     throw error;
   }
+};
+
+export const uploadSingle = async (file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const response = await axiosAPI.post('/upload', { file }, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response?.data;
 };
