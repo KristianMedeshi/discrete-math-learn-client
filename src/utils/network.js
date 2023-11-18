@@ -98,3 +98,5 @@ export const uploadSingle = async (file) => {
   });
   return response?.data;
 };
+
+export default axiosAPI;
