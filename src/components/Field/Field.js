@@ -18,7 +18,7 @@ function Field({
       <label
         htmlFor={name}
         className={`label-borders flex gap-[12px] items-center ${
-          error ? 'border-red border-2 p-[9px]' : ''
+          error ? 'outline-red outline-2' : ''
         }`}
       >
         {icon}

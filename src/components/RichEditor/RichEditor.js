@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import ReactQuill from 'react-quill';
 import { useTranslation } from 'react-i18next';
 import { useMemo, useRef } from 'react';

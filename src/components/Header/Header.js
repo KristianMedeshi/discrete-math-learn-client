@@ -54,7 +54,7 @@ function Header() {
     >
       <Link to="/">
         <img
-          src="/logo.svg"
+          src={`/logoTheme${isLightTheme ? 'Light' : 'Dark'}.svg`}
           alt=""
           className="h-12"
         />
@@ -70,10 +70,10 @@ function Header() {
         >
           {i18n.language}
         </button>
-        <button type="button" className="button">
+        <button type="button" className="button" onClick={() => toggleTheme()}>
           {isLightTheme
-            ? <FiSun size={22} onClick={() => toggleTheme()} />
-            : <FiMoon size={22} onClick={() => toggleTheme()} />}
+            ? <FiSun size={22} />
+            : <FiMoon size={22} />}
         </button>
         <div
           className="flex body-text-m flex-col absolute translate-y-14 -translate-x-8

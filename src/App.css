@@ -44,27 +44,27 @@ label {
 }
 
 .label-borders {
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--color-theme-lines);
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: var(--color-theme-lines);
   border-radius: 8px;
   padding: 10px;
-  transition: border-width 0s, border-color var(--duration) ease-in-out;
+  transition: outline-width 0s, outline-color var(--duration) ease-in-out;
 }
 
 .label-borders:hover {
-  border-color: var(--color-light-purple);
+  outline-color: var(--color-light-purple);
   cursor: text;
 }
 
 .label-borders:focus-within {
-  border-width: 1px;
-  border-color: var(--color-light-purple);
+  outline-width: 1px;
+  outline-color: var(--color-light-purple);
   box-shadow: var(--shadow-hover);
 }
 
 .active-focus {
-  border-color: var(--color-purple);
+  outline-color: var(--color-purple);
   box-shadow: var(--shadow-hover);
 }
 

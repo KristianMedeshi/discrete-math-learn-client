@@ -45,7 +45,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <div className="px-10 py-5">
+      <div className="flex justify-center px-10 py-5">
         <Routes>
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
