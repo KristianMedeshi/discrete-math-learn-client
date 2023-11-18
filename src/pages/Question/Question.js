@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 import RichEditor from '../../components/RichEditor';
 import PageWrapper from '../../components/PageWrapper';
 import Loading from '../Loading';
-import { createAnswer, getQuestion } from '../../utils/network';
+import { createAnswer, getQuestion } from '../../utils/forumApi';
 import formatDate from '../../utils/date';
 
 function Question() {

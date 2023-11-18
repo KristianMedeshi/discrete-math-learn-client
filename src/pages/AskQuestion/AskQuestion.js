@@ -6,7 +6,7 @@ import Field from '../../components/Field';
 import PageWrapper from '../../components/PageWrapper';
 import RichEditor from '../../components/RichEditor';
 import TagsSelect from '../../components/TagsSelect';
-import { createQuestion } from '../../utils/network';
+import { createQuestion } from '../../utils/forumApi';
 
 function AskQuestion() {
   const [t] = useTranslation('global');
@@ -15,7 +15,6 @@ function AskQuestion() {
   } = useForm({
     shouldFocusError: false,
     defaultValues: {
-      description: '',
       tags: [],
     },
   });

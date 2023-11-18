@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { useTranslation } from 'react-i18next';
 import PageWrapper from '../../components/PageWrapper';
 import Loading from '../Loading';
-import { getQuestions } from '../../utils/network';
+import { getQuestions } from '../../utils/forumApi';
 import formatDate from '../../utils/date';
 
 function Forum() {
