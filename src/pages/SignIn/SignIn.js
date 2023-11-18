@@ -8,7 +8,7 @@ import {
   AiOutlineMail, AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible,
 } from 'react-icons/ai';
 import Field from '../../components/Field';
-import { signIn } from '../../utils/network';
+import { signIn } from '../../utils/usersApi';
 import { setLoggedIn } from '../../store/authSlice';
 
 function SignIn() {

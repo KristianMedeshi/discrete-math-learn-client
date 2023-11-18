@@ -7,7 +7,7 @@ import {
   AiOutlineMail, AiOutlineLock, AiOutlineEye, AiOutlineEyeInvisible,
 } from 'react-icons/ai';
 import Field from '../../components/Field';
-import { signUp } from '../../utils/network';
+import { signUp } from '../../utils/usersApi';
 
 function SignUp() {
   const [t] = useTranslation('global');
