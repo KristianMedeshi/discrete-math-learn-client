@@ -1,14 +1,11 @@
-import { PulseLoader } from 'react-spinners';
 import PageWrapper from '../../components/PageWrapper';
+import Loader from '../../components/Loader/Loader';
 
-function Loading() {
+function Loading({ className }) {
   return (
-    <PageWrapper>
+    <PageWrapper className={className}>
       <div className="flex justify-center items-center w-full h-[60vh]">
-        <PulseLoader
-          color="var(--color-light-purple)"
-          speedMultiplier={0.4}
-        />
+        <Loader />
       </div>
     </PageWrapper>
   );

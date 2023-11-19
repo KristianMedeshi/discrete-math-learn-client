@@ -6,6 +6,7 @@ import {
 import { jwtDecode } from 'jwt-decode';
 import Header from './components/Header';
 import AuthGuard from './components/AuthGuard';
+import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Forum from './pages/Forum';
@@ -47,6 +48,7 @@ function App() {
       <Header />
       <div className="flex justify-center px-10 py-5">
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route element={<AuthGuard />}>

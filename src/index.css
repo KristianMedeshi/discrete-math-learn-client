@@ -17,13 +17,13 @@
   --color-theme-secondary: var(--color-light-grey);
   --color-text: var(--color-black);
   --color-theme-lines: var(--color-lines-light);
-  --duration: 0s;
+  --duration: 0.25s;
 }
 
 * {
   transition:
     background-color var(--duration) ease-in-out, 
-    color var(--duration) ease-in-out, 
+    /* color var(--duration) ease-in-out,  */
     border var(--duration) ease-in-out,
     box-shadow var(--duration) ease-in-out;
 }
@@ -49,6 +49,7 @@ body {
 
 input {
   outline: 0 !important;
+  min-width: 0 !important;
   background: transparent !important;
   /* cursor: pointer; */
 }

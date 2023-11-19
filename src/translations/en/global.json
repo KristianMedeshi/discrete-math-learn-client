@@ -26,6 +26,18 @@
     "tagsMessage": "Add up to 5 tags",
     "done": "Done"
   },
+  "courses": {
+    "courses": "Courses",
+    "hours": "hours",
+    "filter": "Filter",
+    "results": "results",
+    "difficulty": "Difficulty",
+    "Beginner": "Beginner",
+    "Intermediate": "Intermediate",
+    "Expert": "Expert",
+    "All levels": "All levels",
+    "duration": "Duration (hours)"
+  },
   "firstName": "First name",
   "firstNamePlaceholder": "Your first name",
   "lastName": "Last name",

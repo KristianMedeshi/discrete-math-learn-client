@@ -39,6 +39,10 @@
   opacity: 0.25;
 }
 
+.button-primary:disabled:hover {
+  background-color: var(--color-light-purple) !important;
+}
+
 label {
   user-select: none;
 }
@@ -64,7 +68,7 @@ label {
 }
 
 .active-focus {
-  outline-color: var(--color-purple);
+  outline-color: var(--color-light-purple) !important;
   box-shadow: var(--shadow-hover);
 }
 

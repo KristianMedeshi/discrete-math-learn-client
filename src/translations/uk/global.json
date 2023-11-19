@@ -26,6 +26,18 @@
     "tagsMessage": "Додайте не більше 5 тегів",
     "done": "Готово"
   },
+  "courses": {
+    "courses": "Курси",
+    "hours": "годин",
+    "filter": "Фільтр",
+    "results": "результатів",
+    "difficulty": "Складність",
+    "Beginner": "Початківець",
+    "Intermediate": "Середній рівень",
+    "Expert": "Експерт",
+    "All levels": "Усі рівні",
+    "duration": "Тривалість (години)"
+  },
   "firstName": "Ім'я",
   "firstNamePlaceholder": "Ваше ім'я",
   "lastName": "Прізвище",
