@@ -5,10 +5,10 @@ import Slider from 'rc-slider';
 import { useTranslation } from 'react-i18next';
 import PageWrapper from '../../components/PageWrapper';
 import Loader from '../../components/Loader/Loader';
+import Pagination from '../../components/Pagination/Pagination';
 import { getCourses } from '../../utils/coursesApi';
 import 'rc-slider/assets/index.css';
 import './Home.scss';
-import Pagination from '../../components/Pagination/Pagination';
 
 function Home() {
   const [t] = useTranslation('global');
@@ -60,7 +60,7 @@ function Home() {
       <div className="flex gap-5 flex-col h-full w-3/12 filter">
         <div className="flex justify-between items-center mt-3">
           <h1 className="heading-s">{t('courses.filter')}</h1>
-          <p className="body-text-m text-[#909090]">
+          <p className="body-text-m text-[#909090]" hidden={isLoading}>
             {resultsLength}
             {' '}
             {t('courses.results')}

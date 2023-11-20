@@ -4,8 +4,8 @@
   --color-light-purple: #633cff;
   --color-white: #ffffff;
   --color-black: #000000;
-  --color-light-grey: #f4f7fd;
-  --color-lines-light: #d1d7dc; /*#e4ebfa;*/
+  --color-light-grey: #c9f7fd; /* #f4f7fd; */
+  --color-lines-light: #bbbbbb; /* #d1d7dc #e4ebfa; */
   --color-lines-dark: #3e3f4e;
   --color-borders: #cfcfcf;
   --color-red: #ff3939;

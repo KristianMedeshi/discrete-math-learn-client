@@ -1,3 +1,4 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useForm } from 'react-hook-form';
@@ -67,19 +68,21 @@ function Question() {
           {answers?.length === 1 ? 'answer' : 'answers'}
         </h1>
         )}
-        {answers?.map((item) => (
-          <div
-            key={item._id}
-            className="p-4 rounded-md bg-secondary"
-          >
-            {parse(item.answer)}
-            <p className="flex justify-between">
-              <span>{item.author}</span>
-              <span>
-                {formatDate(item.createdAt, i18n)}
-              </span>
-            </p>
-          </div>
+        {answers?.map((item, index) => (
+          <React.Fragment key={item._id}>
+            {index > 0 && <div className="divider" />}
+            <div
+              className="flex flex-col gap-2 p-4 mx-4 rounded-sm hover:bg-secondary"
+            >
+              {parse(item.answer)}
+              <p className="flex justify-between">
+                <span>{item.author}</span>
+                <span>
+                  {formatDate(item.createdAt, i18n)}
+                </span>
+              </p>
+            </div>
+          </React.Fragment>
         ))}
       </div>
     </PageWrapper>

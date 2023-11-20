@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useTranslation } from 'react-i18next';
@@ -22,33 +23,35 @@ function Forum() {
           <h1 className="heading-m">{t('forum.questions')}</h1>
           <Link to="/forum/ask" className="button-primary !px-8">{t('forum.askQuestion')}</Link>
         </div>
-        <div className="flex flex-col gap-5">
-          {questions?.map((question) => (
-            <Link
-              key={question._id}
-              to={`/forum/${question._id}`}
-              className="p-4 rounded-md bg-secondary outline-lightPurple outline-1 hover:outline"
-            >
-              <h2 className="heading-xs">{question.title}</h2>
-              <div className="flex gap-2 justify-between">
-                <div className="flex gap-2">
-                  {question.tags?.map((tag) => (
-                    <div
-                      key={tag}
-                      className="bg-lines px-2 py-1 rounded-sm whitespace-nowrap h-fit"
-                    >
-                      {tTags(`${tag}`)}
-                    </div>
-                  ))}
+        <div className="flex flex-col gap-5 py-5">
+          {questions?.map((question, index) => (
+            <React.Fragment key={question._id}>
+              {index > 0 && <div className="divider" />}
+              <Link
+                to={`/forum/${question._id}`}
+                className="flex flex-col gap-3 p-4 rounded-sm hover:bg-secondary mx-5"
+              >
+                <h2 className="heading-xs">{question.title}</h2>
+                <div className="flex gap-2 justify-between">
+                  <div className="flex gap-2">
+                    {question.tags?.map((tag) => (
+                      <div
+                        key={tag}
+                        className="bg-lines px-2 py-1 rounded-sm whitespace-nowrap h-fit"
+                      >
+                        {tTags(`${tag}`)}
+                      </div>
+                    ))}
+                  </div>
+                  <span>
+                    {question.author}
+                    ,
+                    {' '}
+                    {formatDate(question.createdAt, i18n)}
+                  </span>
                 </div>
-                <span>
-                  {question.author}
-                  ,
-                  {' '}
-                  {formatDate(question.createdAt, i18n)}
-                </span>
-              </div>
-            </Link>
+              </Link>
+            </React.Fragment>
           ))}
         </div>
       </div>

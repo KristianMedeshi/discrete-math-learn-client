@@ -60,45 +60,44 @@ function Header() {
         />
       </Link>
       <div
-        ref={langMenuRef}
         className="flex gap-6 items-center"
       >
-        <button
-          type="button"
-          onClick={() => setIsShownLangMenu((value) => !value)}
-          className="button"
-        >
-          {i18n.language}
-        </button>
+        <div ref={langMenuRef}>
+          <button
+            type="button"
+            onClick={() => setIsShownLangMenu((value) => !value)}
+            className="button w-[34px] h-[34px]"
+          >
+            {i18n.language}
+          </button>
+          <div
+            className="menu body-text-m -translate-x-8"
+            style={isShownLangMenu ? {} : { display: 'none' }}
+          >
+            <button
+              type="button"
+              onClick={() => handleChangeLanguage('en')}
+              className="menu-option wide"
+            >
+              <p className="whitespace-nowrap">English (US)</p>
+              <p>en</p>
+            </button>
+            <div className="divider" />
+            <button
+              type="button"
+              onClick={() => handleChangeLanguage('uk')}
+              className="menu-option wide"
+            >
+              <p>Ukraine</p>
+              <p>uk</p>
+            </button>
+          </div>
+        </div>
         <button type="button" className="button" onClick={() => toggleTheme()}>
           {isLightTheme
             ? <FiSun size={22} />
             : <FiMoon size={22} />}
         </button>
-        <div
-          className="flex body-text-m flex-col absolute translate-y-14 -translate-x-8
-            bg-primary rounded-s shadow-[0_1px_5px_2px_rgba(0,0,0,0.1)] border-2 border-lines
-            rounded-md"
-          style={isShownLangMenu ? {} : { display: 'none' }}
-        >
-          <button
-            type="button"
-            onClick={() => handleChangeLanguage('en')}
-            className="menu-option wide"
-          >
-            <p className="whitespace-nowrap">English (US)</p>
-            <p>en</p>
-          </button>
-          <div className="divider" />
-          <button
-            type="button"
-            onClick={() => handleChangeLanguage('uk')}
-            className="menu-option wide"
-          >
-            <p>Ukraine</p>
-            <p>uk</p>
-          </button>
-        </div>
         {isLoggedIn ? (
           <>
             <Link to="forum" className="button">
@@ -108,16 +107,17 @@ function Header() {
               ref={userMenuRef}
               className="flex gap-6 items-center"
             >
-              <div className="button">
+              <button
+                type="button"
+                className="button"
+                onClick={() => setIsShownUserMenu((value) => !value)}
+              >
                 <AiOutlineUser
                   size={22}
-                  onClick={() => setIsShownUserMenu((value) => !value)}
                 />
-              </div>
+              </button>
               <div
-                className="flex flex-col justify-start absolute translate-y-14 -translate-x-12
-                bg-primary rounded-s shadow-[0_1px_5px_2px_rgba(0,0,0,0.1)] border-2 border-lines
-                rounded-md  "
+                className="menu translate-y-14 -translate-x-12"
                 style={isShownUserMenu ? {} : { display: 'none' }}
               >
                 <Link
