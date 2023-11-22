@@ -76,7 +76,7 @@ function Question() {
             >
               {parse(item.answer)}
               <p className="flex justify-between">
-                <span>{item.author}</span>
+                <span>{item.author.fullName}</span>
                 <span>
                   {formatDate(item.createdAt, i18n)}
                 </span>

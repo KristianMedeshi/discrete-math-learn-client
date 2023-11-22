@@ -38,6 +38,7 @@
     "All levels": "All levels",
     "duration": "Duration (hours)"
   },
+  "personal": "Personal info",
   "firstName": "First name",
   "firstNamePlaceholder": "Your first name",
   "lastName": "Last name",
@@ -45,9 +46,22 @@
   "email": "Email address",
   "emailPlaceholder": "e.g. example@email.com",
   "password": "Password",
-  "passwordPlaceholder": "At least 8 characters",
+  "currentPassword": "Current password",
+  "newPassword": "New password",
+  "newPasswordPlaceholder": "Enter a new password",
+  "passwordPlaceholder": "Enter your current password",
+  "card": {
+    "card": "Card",
+    "number": "Number",
+    "numberPlaceholder": "Enter card number",
+    "cvv": "CVV",
+    "cvvPlaceholder": "Enter CVV",
+    "expiry": "Expiry",
+    "expiryPlaceholder": "MM / YY"
+  },
   "emptyFieldError": "Field cannot be empty",
   "invalidFormatError": "Invalid Format",
   "lettersError": "Only letters",
-  "passwordError": "Password must be at least 8 characters long and contain at least one digit, one lowercase, and one uppercase letter."
+  "passwordError": "Password must be at least 8 characters long and contain at least one digit, one lowercase, and one uppercase letter.",
+  "save": "Save"
 }

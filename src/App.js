@@ -12,6 +12,7 @@ import SignUp from './pages/SignUp';
 import Forum from './pages/Forum';
 import Question from './pages/Question';
 import AskQuestion from './pages/AskQuestion';
+import Account from './pages/Account';
 import { setLoggedIn } from './store/authSlice';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
@@ -57,6 +58,7 @@ function App() {
               <Route path=":questionId" element={<Question />} />
               <Route path="ask" element={<AskQuestion />} />
             </Route>
+            <Route path="/account" element={<Account />} />
           </Route>
         </Routes>
       </div>

@@ -8,6 +8,8 @@ function Field({
   icon,
   registerReturn,
   after,
+  onKeyDown,
+  maxLength,
 }) {
   return (
     <div className="flex flex-col gap-1 w-full" style={style}>
@@ -25,6 +27,8 @@ function Field({
         <input
           id={name}
           type={type}
+          onKeyDown={onKeyDown}
+          maxLength={maxLength}
           placeholder={placeholder}
           {...registerReturn}
         />

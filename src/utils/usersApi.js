@@ -27,3 +27,27 @@ export const signIn = async (data) => {
     throw error;
   }
 };
+
+export const getMyInfo = async () => {
+  try {
+    const response = await axiosAPI.get('/users/me');
+    return response?.data;
+  } catch (error) {
+    console.error('Get my info error:', error);
+    throw error;
+  }
+};
+
+export const updateMyInfo = async (data) => {
+  try {
+    const response = await axiosAPI.patch('/users/me', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response?.data;
+  } catch (error) {
+    console.error('Get my info error:', error);
+    throw error;
+  }
+};

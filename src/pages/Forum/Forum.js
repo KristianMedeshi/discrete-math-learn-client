@@ -44,7 +44,7 @@ function Forum() {
                     ))}
                   </div>
                   <span>
-                    {question.author}
+                    {question.author.fullName}
                     ,
                     {' '}
                     {formatDate(question.createdAt, i18n)}
