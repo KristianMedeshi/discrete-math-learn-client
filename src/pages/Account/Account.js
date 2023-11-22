@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
@@ -8,6 +9,7 @@ import {
 } from 'react-icons/ai';
 import PageWrapper from '../../components/PageWrapper';
 import Field from '../../components/Field';
+import UserImage from '../../components/UserImage';
 import Loading from '../Loading';
 import { getMyInfo, updateMyInfo } from '../../utils/usersApi';
 import './Account.css';
@@ -83,7 +85,7 @@ function Account() {
         <div className="flex gap-10">
           <label
             htmlFor="userImage"
-            className="flex-center flex-col rounded-md bg-lightPurple
+            className="flex-center flex-col rounded-md bg-primary
             w-[220px] h-[220px] cursor-pointer"
           >
             <input
@@ -94,17 +96,7 @@ function Account() {
               accept="image/png, image/jpeg"
               {...register('newImage')}
             />
-            {imageSrc && (
-              <div
-                className="w-full h-full overflow-hidden "
-                style={{
-                  backgroundColor: 'var(--color-theme-primary)',
-                  backgroundImage: `url(${imageSrc})`,
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                }}
-              />
-            )}
+            {imageSrc && <UserImage className="w-full h-full" imageSrc={imageSrc} />}
           </label>
           <div className="flex flex-col">
             <h1 className="heading-m">{user?.fullName}</h1>

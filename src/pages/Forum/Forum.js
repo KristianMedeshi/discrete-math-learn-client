@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useTranslation } from 'react-i18next';
 import PageWrapper from '../../components/PageWrapper';
+import UserImage from '../../components/UserImage';
 import Loading from '../Loading';
 import { getQuestions } from '../../utils/forumApi';
 import formatDate from '../../utils/date';
@@ -32,23 +33,23 @@ function Forum() {
                 className="flex flex-col gap-3 p-4 rounded-sm hover:bg-secondary mx-5"
               >
                 <h2 className="heading-xs">{question.title}</h2>
-                <div className="flex gap-2 justify-between">
-                  <div className="flex gap-2">
-                    {question.tags?.map((tag) => (
-                      <div
-                        key={tag}
-                        className="bg-lines px-2 py-1 rounded-sm whitespace-nowrap h-fit"
-                      >
-                        {tTags(`${tag}`)}
-                      </div>
-                    ))}
-                  </div>
-                  <span>
-                    {question.author.fullName}
-                    ,
-                    {' '}
-                    {formatDate(question.createdAt, i18n)}
-                  </span>
+                <div className="flex gap-2">
+                  {question.tags?.map((tag) => (
+                    <div
+                      key={tag}
+                      className="bg-secondary border border-lines
+                        px-2 py-1 rounded-sm whitespace-nowrap h-fit"
+                    >
+                      {tTags(`${tag}`)}
+                    </div>
+                  ))}
+                </div>
+                <div className="flex items-center gap-3 self-end">
+                  <UserImage className="w-8 h-8" imageSrc={question.author.image} />
+                  {question.author.fullName}
+                  ,
+                  {' '}
+                  {formatDate(question.createdAt, i18n)}
                 </div>
               </Link>
             </React.Fragment>

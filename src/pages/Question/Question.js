@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import parse from 'html-react-parser';
 import RichEditor from '../../components/RichEditor';
 import PageWrapper from '../../components/PageWrapper';
+import UserImage from '../../components/UserImage';
 import Loading from '../Loading';
 import { createAnswer, getQuestion } from '../../utils/forumApi';
 import formatDate from '../../utils/date';
@@ -15,14 +15,7 @@ function Question() {
   const { questionId } = useParams();
   const { data, isLoading } = useQuery(questionId, () => getQuestion(questionId));
   const { question, answers } = data || {};
-  const {
-    setValue, getValues, handleSubmit,
-  } = useForm({
-    shouldFocusError: false,
-    defaultValues: {
-      answer: '',
-    },
-  });
+  const [answer, setAnswer] = useState('');
 
   const queryClient = useQueryClient();
   const postAnswerMutation = useMutation(async (postData) => {
@@ -33,9 +26,9 @@ function Question() {
     },
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    postAnswerMutation.mutate(data);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    postAnswerMutation.mutate({ answer });
   };
 
   if (isLoading) {
@@ -49,15 +42,19 @@ function Question() {
       <div className="divider" />
       <div className="flex flex-col gap-5">
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={onSubmit}
           className="flex flex-col gap-3"
         >
           <RichEditor
             placeholder={t('forum.answerPlaceholder')}
-            value={() => getValues('answer')}
-            onChange={(value) => setValue('answer', value)}
+            value={answer}
+            onChange={setAnswer}
           />
-          <button type="submit" className="button-primary !px-14 self-end">
+          <button
+            type="submit"
+            className="button-primary !px-14 self-end"
+            disabled={postAnswerMutation.isLoading}
+          >
             {t('forum.done')}
           </button>
         </form>
@@ -75,12 +72,13 @@ function Question() {
               className="flex flex-col gap-2 p-4 mx-4 rounded-sm hover:bg-secondary"
             >
               {parse(item.answer)}
-              <p className="flex justify-between">
-                <span>{item.author.fullName}</span>
-                <span>
-                  {formatDate(item.createdAt, i18n)}
-                </span>
-              </p>
+              <div className="flex items-center gap-3 self-end">
+                <UserImage className="w-8 h-8" imageSrc={item.author.image} />
+                {item.author.fullName}
+                ,
+                {' '}
+                {formatDate(item.createdAt, i18n)}
+              </div>
             </div>
           </React.Fragment>
         ))}

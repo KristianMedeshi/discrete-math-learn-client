@@ -20,7 +20,7 @@
   }
 
   &:hover {
-    background-color: var(--color-theme-lines);
+    background-color: var(--color-theme-secondary);
   }
 }
 
@@ -30,6 +30,6 @@
   transition: border 0s, background-color var(--duration) ease-in-out;
 
   &:hover {
-    background-color: var(--color-theme-lines);
+    background-color: var(--color-theme-secondary);
   }
 }

@@ -40,7 +40,7 @@ function TagsSelect({ tags, onSelect, onRemove }) {
           <button
             type="button"
             key={tag}
-            className="flex gap-1 items-center bg-lines
+            className="flex gap-1 items-center bg-secondary border border-lines
               whitespace-nowrap py-1 px-2 rounded-sm"
             onClick={() => onRemove(index)}
           >
