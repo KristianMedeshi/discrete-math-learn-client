@@ -1,10 +1,12 @@
 import ReactQuill from 'react-quill';
 import { useTranslation } from 'react-i18next';
-import { useMemo, useRef } from 'react';
+import {
+  useEffect, useMemo, useRef, useState,
+} from 'react';
 import { uploadSingle } from '../../utils/network';
-import './RichEditor.css';
-import './Snow.css';
-import './Bubble.css';
+import './RichEditor.scss';
+import './Snow.scss';
+import './Bubble.scss';
 
 function RichEditor({
   theme = 'snow',
@@ -15,6 +17,7 @@ function RichEditor({
 }) {
   const quillRef = useRef(null);
   const [, i18n] = useTranslation('global');
+  const [valueEditor, setValueEditor] = useState(value);
 
   const imageHandler = () => {
     console.log('handles image');
@@ -62,6 +65,10 @@ function RichEditor({
     [],
   );
 
+  useEffect(() => {
+    onChange(valueEditor);
+  }, [valueEditor]);
+
   return (
     <ReactQuill
       ref={quillRef}
@@ -69,8 +76,8 @@ function RichEditor({
       theme={theme}
       placeholder={placeholder}
       modules={modules}
-      value={value}
-      onChange={onChange}
+      value={valueEditor}
+      onChange={setValueEditor}
       readOnly={readOnly}
     />
   );
