@@ -10,10 +10,12 @@ import './Bubble.scss';
 
 function RichEditor({
   theme = 'snow',
+  name,
   placeholder,
   value,
   onChange,
   readOnly = false,
+  error,
 }) {
   const quillRef = useRef(null);
   const [, i18n] = useTranslation('global');
@@ -66,20 +68,31 @@ function RichEditor({
   );
 
   useEffect(() => {
+    console.log('editor', valueEditor);
     onChange(valueEditor);
   }, [valueEditor]);
 
   return (
-    <ReactQuill
-      ref={quillRef}
-      className={i18n.language}
-      theme={theme}
-      placeholder={placeholder}
-      modules={modules}
-      value={valueEditor}
-      onChange={setValueEditor}
-      readOnly={readOnly}
-    />
+    <div className="flex flex-col gap-1 w-full">
+      <small hidden={!name} className={`body-text-s ${error ? '!text-red' : ''}`}>
+        {name}
+        :
+      </small>
+      <ReactQuill
+        ref={quillRef}
+        className={`${i18n.language} ${error ? 'error' : ''}`}
+        theme={theme}
+        placeholder={placeholder}
+        modules={modules}
+        value={valueEditor}
+        onChange={setValueEditor}
+        readOnly={readOnly}
+      />
+      <span className="body-text-s !text-red h-[8px] whitespace-nowrap">
+        {error?.message}
+        {' '}
+      </span>
+    </div>
   );
 }
 

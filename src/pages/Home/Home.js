@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
-import Slider from 'rc-slider';
 import { useTranslation } from 'react-i18next';
-import PageWrapper from '../../components/PageWrapper';
+import { useSelector } from 'react-redux';
+import Slider from 'rc-slider';
 import Loader from '../../components/Loader/Loader';
 import Pagination from '../../components/Pagination/Pagination';
 import { getCourses } from '../../utils/coursesApi';
@@ -13,8 +13,9 @@ import './Home.scss';
 function Home() {
   const [t] = useTranslation('global');
   const [skip, setSkip] = useState(0);
+  const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
   const limit = 10;
-  const [checkedDifficulties, setCheckedDifficulties] = useState([]);
+  const [checkedLevels, setCheckedLevels] = useState([]);
   const minDuration = 0;
   const maxDuration = 100;
   const [inputMinDuration, setInputMinDuration] = useState(minDuration);
@@ -23,19 +24,19 @@ function Home() {
   const {
     data, isLoading,
   } = useQuery(
-    ['courses', skip, checkedDifficulties, durationRange],
-    async () => getCourses(skip, limit, checkedDifficulties, durationRange),
+    ['courses', skip, checkedLevels, durationRange],
+    async () => getCourses(skip, limit, checkedLevels, durationRange),
   );
   const { courses, resultsLength } = data ?? {};
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
 
-    setCheckedDifficulties((prevDifficulties) => {
+    setCheckedLevels((prevLevels) => {
       if (checked) {
-        return [...prevDifficulties, value];
+        return [...prevLevels, value];
       }
-      return prevDifficulties.filter((difficulty) => difficulty !== value);
+      return prevLevels.filter((level) => level !== value);
     });
   };
 
@@ -56,7 +57,7 @@ function Home() {
   };
 
   return (
-    <PageWrapper className="!flex-row w-full">
+    <div className="page-wrapper !flex-row w-full">
       <div className="flex gap-5 flex-col h-full w-3/12 filter">
         <div className="flex justify-between items-center mt-3">
           <h1 className="heading-s">{t('courses.filter')}</h1>
@@ -67,13 +68,13 @@ function Home() {
           </p>
         </div>
         <div className="flex flex-col">
-          <h6 className="heading-xs mb-2">{t('courses.difficulty')}</h6>
+          <h6 className="heading-xs mb-2">{t('courses.level')}</h6>
           <label htmlFor="beginner" className="filter-checkbox">
             <input
               id="beginner"
               type="checkbox"
               value="Beginner"
-              checked={checkedDifficulties.includes('Beginner')}
+              checked={checkedLevels.includes('Beginner')}
               onChange={handleCheckboxChange}
             />
             <p>{t('courses.Beginner')}</p>
@@ -83,7 +84,7 @@ function Home() {
               id="intermediate"
               type="checkbox"
               value="Intermediate"
-              checked={checkedDifficulties.includes('Intermediate')}
+              checked={checkedLevels.includes('Intermediate')}
               onChange={handleCheckboxChange}
             />
             <p>{t('courses.Intermediate')}</p>
@@ -93,7 +94,7 @@ function Home() {
               id="expert"
               type="checkbox"
               value="Expert"
-              checked={checkedDifficulties.includes('Expert')}
+              checked={checkedLevels.includes('Expert')}
               onChange={handleCheckboxChange}
             />
             <p>{t('courses.Expert')}</p>
@@ -103,13 +104,13 @@ function Home() {
               id="allLevels"
               type="checkbox"
               value="All levels"
-              checked={checkedDifficulties.includes('All levels')}
+              checked={checkedLevels.includes('All levels')}
               onChange={handleCheckboxChange}
             />
             <p>{t('courses.All levels')}</p>
           </label>
         </div>
-        <div className="divider" />
+        <div className="divider-x" />
         <h6 className="heading-xs mb-2">{t('courses.duration')}</h6>
         <Slider
           range
@@ -150,17 +151,23 @@ function Home() {
           </button>
         </div>
       </div>
+      <div className="divider-y" />
       {isLoading ? (
         <div className="flex w-full justify-center items-center">
           <Loader />
         </div>
       ) : (
         <div className="flex flex-col w-full gap-5">
-          <h1 className="heading-m mx-10">{t('courses.courses')}</h1>
+          <div className="flex justify-between">
+            <h1 className="heading-m mx-10">{t('courses.courses')}</h1>
+            <Link to="/courses/add" className="button-primary px-5" hidden={!isLoggedIn}>
+              {t('courses.add')}
+            </Link>
+          </div>
           <div className="flex flex-col h-full gap-5 justify-between">
             {courses?.map((course, index) => (
               <React.Fragment key={course._id}>
-                {index > 0 && <div className="divider" />}
+                {index > 0 && <div className="divider-x" />}
                 <Link
                   to={`/courses/${course._id}`}
                   className="flex items-center gap-6 mx-10 hover:bg-secondary"
@@ -177,12 +184,7 @@ function Home() {
                       </p>
                     </h5>
                     <div className="flex body-text-s">
-                      {course.teachers?.map((teacher, index) => (
-                        <div key={course._id + teacher}>
-                          {index > 0 && ', '}
-                          {teacher}
-                        </div>
-                      ))}
+                      {course.instructors?.join(', ')}
                     </div>
                     <p className="body-text-s text-[#808080]">
                       {course.duration}
@@ -190,7 +192,7 @@ function Home() {
                       {t('courses.hours')}
                     </p>
                     <p className="body-text-s">
-                      {t(`courses.${course.difficulty}`)}
+                      {t(`courses.${course.level}`)}
                     </p>
                   </div>
                 </Link>
@@ -205,7 +207,7 @@ function Home() {
           </div>
         </div>
       )}
-    </PageWrapper>
+    </div>
   );
 }
 

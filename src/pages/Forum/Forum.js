@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useTranslation } from 'react-i18next';
-import PageWrapper from '../../components/PageWrapper';
-import UserImage from '../../components/UserImage';
+import Image from '../../components/Image';
 import Loading from '../Loading';
 import { getQuestions } from '../../utils/forumApi';
 import formatDate from '../../utils/date';
@@ -18,7 +17,7 @@ function Forum() {
   }
 
   return (
-    <PageWrapper>
+    <div className="page-wrapper">
       <div className="flex flex-col gap-5">
         <div className="flex justify-between">
           <h1 className="heading-m">{t('forum.questions')}</h1>
@@ -27,7 +26,7 @@ function Forum() {
         <div className="flex flex-col gap-5 py-5">
           {questions?.map((question, index) => (
             <React.Fragment key={question._id}>
-              {index > 0 && <div className="divider" />}
+              {index > 0 && <div className="divider-x" />}
               <Link
                 to={`/forum/${question._id}`}
                 className="flex flex-col gap-3 p-4 rounded-sm hover:bg-secondary mx-5"
@@ -45,7 +44,7 @@ function Forum() {
                   ))}
                 </div>
                 <div className="flex items-center gap-3 self-end">
-                  <UserImage className="w-8 h-8" imageSrc={question.author.image} />
+                  <Image className="!w-8 !h-8" imageSrc={question.author.image} />
                   {question.author.fullName}
                   ,
                   {' '}
@@ -56,7 +55,7 @@ function Forum() {
           ))}
         </div>
       </div>
-    </PageWrapper>
+    </div>
   );
 }
 

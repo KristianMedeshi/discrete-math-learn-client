@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useTranslation } from 'react-i18next';
@@ -7,9 +5,8 @@ import { useForm, useWatch } from 'react-hook-form';
 import {
   AiOutlineEye, AiOutlineEyeInvisible,
 } from 'react-icons/ai';
-import PageWrapper from '../../components/PageWrapper';
 import Field from '../../components/Field';
-import UserImage from '../../components/UserImage';
+import Image from '../../components/Image';
 import Loading from '../Loading';
 import { getMyInfo, updateMyInfo } from '../../utils/usersApi';
 import './Account.css';
@@ -17,7 +14,7 @@ import {
   cardCvvRegex, cardExpiryRegex, cardNumberRegex, emailRegex, lettersRegex, passwordRegex,
 } from '../../constants/regex';
 import {
-  correctInputCardNumber, correctInputExpiry,
+  convertToBase64, correctInputCardNumber, correctInputExpiry,
 } from '../../utils/helpers';
 
 function Account() {
@@ -35,13 +32,6 @@ function Account() {
     },
   });
   const { user } = data ?? {};
-
-  const convertToBase64 = (file) => new Promise((resolve, reject) => {
-    const fileReader = new FileReader();
-    fileReader.onload = () => resolve(fileReader.result);
-    fileReader.onerror = (error) => reject(error);
-    fileReader.readAsDataURL(file);
-  });
 
   useEffect(() => {
     if (newImage?.[0]) {
@@ -77,7 +67,7 @@ function Account() {
   }
 
   return (
-    <PageWrapper className="">
+    <div className="page-wrapper">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-10 w-full"
@@ -96,7 +86,7 @@ function Account() {
               accept="image/png, image/jpeg"
               {...register('newImage')}
             />
-            {imageSrc && <UserImage className="w-full h-full" imageSrc={imageSrc} />}
+            {imageSrc && <Image imageSrc={imageSrc} />}
           </label>
           <div className="flex flex-col">
             <h1 className="heading-m">{user?.fullName}</h1>
@@ -227,7 +217,7 @@ function Account() {
           </div>
         </div>
         <div className="flex flex-col">
-          <div className="divider my-4" />
+          <div className="divider-x my-4" />
           <button
             type="submit"
             className="button-primary px-12 self-end"
@@ -237,7 +227,7 @@ function Account() {
           </button>
         </div>
       </form>
-    </PageWrapper>
+    </div>
   );
 }
 

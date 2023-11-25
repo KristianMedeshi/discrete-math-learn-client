@@ -23,21 +23,31 @@
     "descriptionPlaceholder": "Розпишіть ваше питання детальніше",
     "answerPlaceholder": "Напишіть свою відповідь",
     "tags": "Теги",
-    "tagsMessage": "Додайте не більше 5 тегів",
-    "done": "Готово"
+    "tagsMessage": "Додайте не більше 5 тегів"
   },
   "courses": {
     "courses": "Курси",
+    "add": "Додати курс",
+    "description": "Деталі",
+    "create": "Створить курс",
+    "price": "Ціна",
+    "pricePlaceholder": "49.99",
+    "instructors": "Інструктори",
+    "instructorsPlaceholder": "Введіть інструкторів через кому",
+    "namePlaceholder": "Введіть назву вашого курсу",
+    "descriptionPlaceholder": "Опишіть ваш курс",
+    "hoursPlaceholder": "30",
     "hours": "годин",
     "filter": "Фільтр",
     "results": "результатів",
-    "difficulty": "Складність",
+    "level": "Рівень",
     "Beginner": "Початківець",
     "Intermediate": "Середній рівень",
     "Expert": "Експерт",
     "All levels": "Усі рівні",
     "duration": "Тривалість (години)"
   },
+  "name": "Ім'я",
   "personal": "Персональні дані",
   "firstName": "Ім'я",
   "firstNamePlaceholder": "Ваше ім'я",
@@ -63,5 +73,6 @@
   "invalidFormatError": "Невірний формат",
   "lettersError": "Тільки букви",
   "passwordError": "Пароль повинен містити щонайменш 8 символів та щонайменш одну цифру, одну малу літеру, одну велику літеру",
-  "save": "Зберегти"
+  "save": "Зберегти",
+  "done": "Готово"
 }

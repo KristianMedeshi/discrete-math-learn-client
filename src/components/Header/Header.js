@@ -82,7 +82,7 @@ function Header() {
               <p className="whitespace-nowrap">English (US)</p>
               <p>en</p>
             </button>
-            <div className="divider" />
+            <div className="divider-x" />
             <button
               type="button"
               onClick={() => handleChangeLanguage('uk')}
@@ -126,7 +126,7 @@ function Header() {
                 >
                   Account
                 </Link>
-                <div className="divider" />
+                <div className="divider-x" />
                 <button
                   type="button"
                   className="menu-option"
@@ -147,7 +147,7 @@ function Header() {
             </Link>
             <Link
               to="/sign-up"
-              className="bg-lightPurple hover:bg-purple text-[#fff] px-3 py-1 rounded-[4px] hover:"
+              className="bg-lightPurple hover:bg-purple text-[#fff] px-3 py-1 rounded-[4px]"
             >
               {t('header.signUp')}
             </Link>

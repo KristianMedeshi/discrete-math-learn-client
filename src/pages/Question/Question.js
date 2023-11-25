@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useTranslation } from 'react-i18next';
 import parse from 'html-react-parser';
+import { useForm } from 'react-hook-form';
 import RichEditor from '../../components/RichEditor';
-import PageWrapper from '../../components/PageWrapper';
-import UserImage from '../../components/UserImage';
+import Image from '../../components/Image';
 import Loading from '../Loading';
 import { createAnswer, getQuestion } from '../../utils/forumApi';
 import formatDate from '../../utils/date';
+import { emptyEditorRegex } from '../../constants/regex';
 
 function Question() {
   const [t, i18n] = useTranslation('global');
   const { questionId } = useParams();
   const { data, isLoading } = useQuery(questionId, () => getQuestion(questionId));
   const { question, answers } = data || {};
-  const [answer, setAnswer] = useState('');
+  const {
+    register, formState: { errors }, handleSubmit, getValues, setValue,
+  } = useForm({ shouldFocusError: false });
 
   const queryClient = useQueryClient();
   const postAnswerMutation = useMutation(async (postData) => {
@@ -26,9 +29,9 @@ function Question() {
     },
   });
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    postAnswerMutation.mutate({ answer });
+  const onSubmit = (data) => {
+    console.log(data);
+    postAnswerMutation.mutate(data);
   };
 
   if (isLoading) {
@@ -36,26 +39,37 @@ function Question() {
   }
 
   return (
-    <PageWrapper>
+    <div className="page-wrapper">
       <h1 className="heading-m">{question?.title}</h1>
       {question?.description && parse(question.description)}
-      <div className="divider" />
+      <div className="divider-x" />
       <div className="flex flex-col gap-5">
         <form
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col gap-3"
         >
           <RichEditor
+            {...register('answer', {
+              required: t('emptyFieldError'),
+              pattern: {
+                value: emptyEditorRegex,
+                message: t('emptyFieldError'),
+              },
+            })}
+            name={undefined}
+            error={errors.answer}
             placeholder={t('forum.answerPlaceholder')}
-            value={answer}
-            onChange={setAnswer}
+            value={() => getValues('answer')}
+            onChange={(value) => setValue('answer', value, {
+              shouldValidate: getValues('answer'),
+            })}
           />
           <button
             type="submit"
             className="button-primary !px-14 self-end"
             disabled={postAnswerMutation.isLoading}
           >
-            {t('forum.done')}
+            {t('done')}
           </button>
         </form>
         {answers && (
@@ -67,13 +81,13 @@ function Question() {
         )}
         {answers?.map((item, index) => (
           <React.Fragment key={item._id}>
-            {index > 0 && <div className="divider" />}
+            {index > 0 && <div className="divider-x" />}
             <div
               className="flex flex-col gap-2 p-4 mx-4 rounded-sm hover:bg-secondary"
             >
               {parse(item.answer)}
               <div className="flex items-center gap-3 self-end">
-                <UserImage className="w-8 h-8" imageSrc={item.author.image} />
+                <Image className="!w-8 !h-8" imageSrc={item.author.image} />
                 {item.author.fullName}
                 ,
                 {' '}
@@ -83,7 +97,7 @@ function Question() {
           </React.Fragment>
         ))}
       </div>
-    </PageWrapper>
+    </div>
   );
 }
 

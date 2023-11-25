@@ -27,12 +27,12 @@
   background-color: var(--color-light-purple) !important;
   color: var(--color-white) !important;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 6px;
 }
 
 .button-primary:hover {
-  box-shadow: var(--shadow-hover) !important;
-  background-color: var(--color-hover-purple) !important;
+  /* box-shadow: var(--shadow-hover) !important; */
+  background-color: var(--color-purple) !important;
 }
 
 .button-primary:disabled {
@@ -72,9 +72,28 @@ label {
   box-shadow: var(--shadow-hover);
 }
 
-.divider {
+.divider-x {
   height: 1px;
   background-color: var(--color-theme-lines);
   /* margin: 2px 0; */
   width: 100%;
+}
+
+.divider-y {
+  width: 1px;
+  background-color: var(--color-theme-lines);
+  /* margin: 2px 0; */
+  height: 100%;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 85vh;
+  min-width: 80vw;
+  background-color: var(--color-theme-primary);
+  padding: 40px 28px;
+  border: 1px solid var(--color-theme-lines);
+  border-radius: 2px;
 }

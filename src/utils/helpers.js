@@ -1,3 +1,4 @@
+import React from 'react';
 import { specSymbolRegex } from '../constants/regex';
 
 const digitRegex = /^\d$/;
@@ -73,4 +74,42 @@ export const correctInputExpiry = (event) => {
       target.value += key;
     }
   }
+};
+
+export const convertToBase64 = (file) => new Promise((resolve, reject) => {
+  const fileReader = new FileReader();
+  fileReader.onload = () => resolve(fileReader.result);
+  fileReader.onerror = (error) => reject(error);
+  fileReader.readAsDataURL(file);
+});
+
+export const parseHtmlReplace = (domNode) => {
+  if (domNode.type === 'text') {
+    return domNode.data;
+  }
+
+  if (domNode.name === 'br') {
+    return <br />;
+  }
+
+  if (domNode.name === 'ol') {
+    return (
+      <ol style={{ listStyleType: 'decimal' }}>
+        <div style={{ paddingLeft: '20px' }}>
+          {domNode.children && domNode.children.map((child, index) => (
+            <React.Fragment key={index}>{parseHtmlReplace(child)}</React.Fragment>
+          ))}
+
+        </div>
+      </ol>
+    );
+  }
+
+  return (
+    <domNode.name {...domNode.attribs}>
+      {domNode.children && domNode.children.map((child, index) => (
+        <React.Fragment key={index}>{parseHtmlReplace(child)}</React.Fragment>
+      ))}
+    </domNode.name>
+  );
 };

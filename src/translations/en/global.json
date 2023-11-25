@@ -23,21 +23,31 @@
     "descriptionPlaceholder": "Describe your question in details",
     "answerPlaceholder": "Write your answer",
     "tags": "Tags",
-    "tagsMessage": "Add up to 5 tags",
-    "done": "Done"
+    "tagsMessage": "Add up to 5 tags"
   },
   "courses": {
     "courses": "Courses",
+    "add": "Add course",
+    "create": "Create course",
+    "description": "Description",
+    "price": "Price",
+    "pricePlaceholder": "49.99",
+    "instructors": "Instructors",
+    "instructorsPlaceholder": "Write instructors separated by comma",
+    "namePlaceholder": "Enter your course name",
+    "descriptionPlaceholder": "Describe your course",
     "hours": "hours",
+    "hoursPlaceholder": "30",
     "filter": "Filter",
     "results": "results",
-    "difficulty": "Difficulty",
+    "level": "Level",
     "Beginner": "Beginner",
     "Intermediate": "Intermediate",
     "Expert": "Expert",
     "All levels": "All levels",
     "duration": "Duration (hours)"
   },
+  "name": "Name",
   "personal": "Personal info",
   "firstName": "First name",
   "firstNamePlaceholder": "Your first name",
@@ -63,5 +73,6 @@
   "invalidFormatError": "Invalid Format",
   "lettersError": "Only letters",
   "passwordError": "Password must be at least 8 characters long and contain at least one digit, one lowercase, and one uppercase letter.",
-  "save": "Save"
+  "save": "Save",
+  "done": "Done"
 }

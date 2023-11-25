@@ -3,7 +3,6 @@ import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQueryClient } from 'react-query';
 import Field from '../../components/Field';
-import PageWrapper from '../../components/PageWrapper';
 import RichEditor from '../../components/RichEditor';
 import TagsSelect from '../../components/TagsSelect';
 import { createQuestion } from '../../utils/forumApi';
@@ -48,7 +47,7 @@ function AskQuestion() {
   };
 
   return (
-    <PageWrapper>
+    <div className="page-wrapper">
       <h1 className="heading-m">{t('forum.yourQuestion')}</h1>
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -62,17 +61,12 @@ function AskQuestion() {
             required: t('emptyFieldError'),
           })}
         />
-        <div className="flex flex-col gap-1 w-full">
-          <small className={`body-text-s ${errors.description ? '!text-red' : ''}`}>
-            {t('forum.description')}
-            :
-          </small>
-          <RichEditor
-            placeholder={t('forum.descriptionPlaceholder')}
-            value={() => getValues('description')}
-            onChange={(value) => setValue('description', value)}
-          />
-        </div>
+        <RichEditor
+          name={t('forum.description')}
+          placeholder={t('forum.descriptionPlaceholder')}
+          value={() => getValues('description')}
+          onChange={(value) => setValue('description', value)}
+        />
         <div className="flex flex-col gap-1 w-full">
           <small className={`body-text-s ${errors.tags ? '!text-red' : ''}`}>
             {t('forum.tags')}
@@ -85,10 +79,10 @@ function AskQuestion() {
           />
         </div>
         <button type="submit" className="button-primary !px-14 mt-5 self-end">
-          {t('forum.done')}
+          {t('done')}
         </button>
       </form>
-    </PageWrapper>
+    </div>
   );
 }
 
