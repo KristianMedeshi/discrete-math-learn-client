@@ -89,7 +89,7 @@ label {
 .page-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   min-height: 85vh;
   min-width: 80vw;
   background-color: var(--color-theme-primary);

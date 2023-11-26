@@ -47,42 +47,41 @@ function AskQuestion() {
   };
 
   return (
-    <div className="page-wrapper">
+    <form
+      className="page-wrapper"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <h1 className="heading-m">{t('forum.yourQuestion')}</h1>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col gap-5"
-      >
-        <Field
-          name={t('forum.title')}
-          placeholder={t('forum.titlePlaceholder')}
-          error={errors.title}
-          registerReturn={register('title', {
-            required: t('emptyFieldError'),
-          })}
+      <Field
+        name={t('forum.title')}
+        placeholder={t('forum.titlePlaceholder')}
+        error={errors.title}
+        registerReturn={register('title', {
+          required: t('emptyFieldError'),
+        })}
+      />
+      <RichEditor
+        name={t('forum.description')}
+        placeholder={t('forum.descriptionPlaceholder')}
+        value={() => getValues('description')}
+        onChange={(value) => setValue('description', value)}
+      />
+      <div className="flex flex-col gap-1 w-full">
+        <small className={`body-text-s ${errors.tags ? '!text-red' : ''}`}>
+          {t('forum.tags')}
+          :
+        </small>
+        <TagsSelect
+          tags={currentTags}
+          onSelect={handleSelectTag}
+          onRemove={handleRemoveTag}
         />
-        <RichEditor
-          name={t('forum.description')}
-          placeholder={t('forum.descriptionPlaceholder')}
-          value={() => getValues('description')}
-          onChange={(value) => setValue('description', value)}
-        />
-        <div className="flex flex-col gap-1 w-full">
-          <small className={`body-text-s ${errors.tags ? '!text-red' : ''}`}>
-            {t('forum.tags')}
-            :
-          </small>
-          <TagsSelect
-            tags={currentTags}
-            onSelect={handleSelectTag}
-            onRemove={handleRemoveTag}
-          />
-        </div>
-        <button type="submit" className="button-primary !px-14 mt-5 self-end">
-          {t('done')}
-        </button>
-      </form>
-    </div>
+      </div>
+      <div className="divider-x mt-5" />
+      <button type="submit" className="button-primary !px-14 self-end">
+        {t('done')}
+      </button>
+    </form>
   );
 }
 
