@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import Slider from 'rc-slider';
@@ -15,28 +15,39 @@ function Home() {
   const [skip, setSkip] = useState(0);
   const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
   const limit = 10;
-  const [checkedLevels, setCheckedLevels] = useState([]);
   const minDuration = 0;
   const maxDuration = 100;
   const [inputMinDuration, setInputMinDuration] = useState(minDuration);
   const [inputMaxDuration, setInputMaxDuration] = useState(maxDuration);
-  const [durationRange, setDurationRange] = useState([minDuration, maxDuration]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const levels = searchParams.getAll('levels');
+  const duration = searchParams.getAll('duration');
+
   const {
     data, isLoading,
   } = useQuery(
-    ['courses', skip, checkedLevels, durationRange],
-    async () => getCourses(skip, limit, checkedLevels, durationRange),
+    ['courses', skip, levels, duration],
+    async () => getCourses(skip, limit, levels, duration),
   );
   const { courses, resultsLength } = data ?? {};
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
-
-    setCheckedLevels((prevLevels) => {
+    setSearchParams((prev) => {
       if (checked) {
-        return [...prevLevels, value];
+        prev.append('levels', value);
+      } else {
+        prev.delete('levels', value);
       }
-      return prevLevels.filter((level) => level !== value);
+      return prev;
+    });
+  };
+
+  const handleRangeChange = () => {
+    setSearchParams((prev) => {
+      prev.set('duration', inputMinDuration);
+      prev.append('duration', inputMaxDuration);
+      return prev;
     });
   };
 
@@ -74,7 +85,7 @@ function Home() {
               id="beginner"
               type="checkbox"
               value="Beginner"
-              checked={checkedLevels.includes('Beginner')}
+              checked={levels.includes('Beginner')}
               onChange={handleCheckboxChange}
             />
             <p>{t('courses.Beginner')}</p>
@@ -84,7 +95,7 @@ function Home() {
               id="intermediate"
               type="checkbox"
               value="Intermediate"
-              checked={checkedLevels.includes('Intermediate')}
+              checked={levels.includes('Intermediate')}
               onChange={handleCheckboxChange}
             />
             <p>{t('courses.Intermediate')}</p>
@@ -94,7 +105,7 @@ function Home() {
               id="expert"
               type="checkbox"
               value="Expert"
-              checked={checkedLevels.includes('Expert')}
+              checked={levels.includes('Expert')}
               onChange={handleCheckboxChange}
             />
             <p>{t('courses.Expert')}</p>
@@ -104,7 +115,7 @@ function Home() {
               id="allLevels"
               type="checkbox"
               value="All levels"
-              checked={checkedLevels.includes('All levels')}
+              checked={levels.includes('All levels')}
               onChange={handleCheckboxChange}
             />
             <p>{t('courses.All levels')}</p>
@@ -145,7 +156,7 @@ function Home() {
             type="button"
             disabled={inputMinDuration > inputMaxDuration}
             className="button-primary px-5 py-1 rounded-md"
-            onClick={() => setDurationRange([inputMinDuration, inputMaxDuration])}
+            onClick={handleRangeChange}
           >
             OK
           </button>
