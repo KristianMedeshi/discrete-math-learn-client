@@ -26,8 +26,10 @@
     "tagsMessage": "Add up to 5 tags"
   },
   "courses": {
+    "about": "About",
     "courses": "Courses",
     "add": "Add course",
+    "addBlock": "Add chapter",
     "create": "Create course",
     "description": "Description",
     "price": "Price",

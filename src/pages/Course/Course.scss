@@ -1,0 +1,14 @@
+.sidebar-tab {
+  padding: 8px;
+  border-radius: 4px;
+  &:hover {
+    background: var(--color-theme-secondary);
+  }
+}
+
+code {
+  background-color: var(--color-theme-secondary); /*#f4f4f4 */;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+}
