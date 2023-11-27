@@ -40,3 +40,13 @@ export const getCourse = async (id) => {
     throw error;
   }
 };
+
+export const getCourseBlock = async (courseId, blockId) => {
+  try {
+    const response = await axiosAPI.get(`/courses/${courseId}/${blockId}`);
+    return response?.data;
+  } catch (error) {
+    console.error('Get course error:', error);
+    throw error;
+  }
+};
