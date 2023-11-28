@@ -53,7 +53,7 @@ function AskQuestion() {
     >
       <h1 className="heading-m">{t('forum.yourQuestion')}</h1>
       <Field
-        name={t('forum.title')}
+        name={t('title')}
         placeholder={t('forum.titlePlaceholder')}
         error={errors.title}
         registerReturn={register('title', {
