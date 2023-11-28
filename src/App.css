@@ -53,7 +53,7 @@ label {
   outline-color: var(--color-theme-lines);
   border-radius: 8px;
   padding: 10px;
-  transition: outline-width 0s, outline-color var(--duration) ease-in-out;
+  transition: outline-width 0s, outline-color var(--duration) ease-in-out, background-color var(--duration) ease-in-out;
 }
 
 .label-borders:hover {
@@ -96,4 +96,16 @@ label {
   padding: 40px 28px;
   border: 1px solid var(--color-theme-lines);
   border-radius: 2px;
+}
+
+.ql-snow.ql-container {
+  background-color: transparent;
+  font-size: 18px !important;
+}
+
+code {
+  background-color: var(--color-theme-secondary) !important; /*#f4f4f4 */;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-family: 'Courier New', monospace !important;
 }
