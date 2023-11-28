@@ -39,11 +39,7 @@ function Header() {
   };
 
   useEffect(() => {
-    if (isLightTheme) {
-      document.documentElement.classList.remove('dark');
-    } else {
-      document.documentElement.classList.add('dark');
-    }
+    document.documentElement.classList.toggle('dark', !isLightTheme);
     localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
   }, [isLightTheme]);
 
