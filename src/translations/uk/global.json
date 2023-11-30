@@ -1,7 +1,10 @@
 {
   "header": {
     "signIn": "Війти",
-    "signUp": "Зареєструватися"
+    "signUp": "Зареєструватися",
+    "myCourses": "Мої курси",
+    "account": "Аккаунт",
+    "logout": "Вийти"
   },
   "signIn": {
     "title": "Війти",
@@ -62,6 +65,7 @@
     "question": "Запитання",
     "correctIndexOption": "Правильний варіант"
   },
+  "myCourses": "Мої курси",
   "title": "Заголовок",
   "name": "Ім'я",
   "answer": "Відповідь",
