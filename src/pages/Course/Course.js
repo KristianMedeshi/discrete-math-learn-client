@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useQuery } from 'react-query';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { FaCheck, FaLock } from 'react-icons/fa';
 import Loading from '../Loading';
 import CourseAbout from './CourseAbout';
 import CourseBlock from './CourseBlock';
@@ -13,16 +14,12 @@ function Course() {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const blockParam = searchParams.get('block');
-  const { data, isLoading } = useQuery(`courses ${id}`, async () => getCourse(id));
+  const { data, isLoading } = useQuery(`courses/${id}`, async () => getCourse(id));
   const { course, blocks } = data ?? {};
 
   const setBlock = (block) => {
     setSearchParams((prev) => ({ ...prev, block }));
   };
-
-  useEffect(() => {
-    console.log(searchParams.get('block'));
-  }, [searchParams]);
 
   if (isLoading) {
     return <Loading className="w-full" />;
@@ -44,21 +41,28 @@ function Course() {
             <button
               type="button"
               onClick={() => setBlock(block._id)}
-              className="sidebar-tab"
+              className={`sidebar-tab flex items-center justify-center relative
+                ${course.isBought ? 'bg-primary' : 'bg-secondary pointer-events-none'}`}
             >
               {block.title}
+              <FaLock className="absolute right-3" hidden={course.isBought} />
+              <FaCheck className="absolute right-3" hidden={!block.isPassed} />
             </button>
           </React.Fragment>
         ))}
-        <div className="divider-x" />
-        <Link
-          to={`/courses/${id}/add`}
-          className="sidebar-tab text-center"
-        >
-          {t('courses.addBlock')}
-        </Link>
+        {course.isAuthor && (
+        <>
+          <div className="divider-x" />
+          <Link
+            to={`/courses/${id}/add`}
+            className="sidebar-tab text-center"
+          >
+            {t('courses.addBlock')}
+          </Link>
+        </>
+        )}
       </div>
-      <div className="divider-y" />
+      <div className="divider-y mx-2" />
       <div className="w-full">
         {blockParam ? <CourseBlock id={blockParam} /> : <CourseAbout course={course} />}
       </div>

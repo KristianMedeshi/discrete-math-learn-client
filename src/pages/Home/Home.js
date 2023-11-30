@@ -1,35 +1,52 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import Slider from 'rc-slider';
-import Loader from '../../components/Loader/Loader';
-import Pagination from '../../components/Pagination/Pagination';
+import Loader from '../../components/Loader';
+import Pagination from '../../components/Pagination';
 import { getCourses } from '../../utils/coursesApi';
 import 'rc-slider/assets/index.css';
 import './Home.scss';
 
 function Home() {
-  const [t] = useTranslation('global');
-  const [skip, setSkip] = useState(0);
-  const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
   const limit = 10;
   const minDuration = 0;
   const maxDuration = 100;
-  const [inputMinDuration, setInputMinDuration] = useState(minDuration);
-  const [inputMaxDuration, setInputMaxDuration] = useState(maxDuration);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const levels = searchParams.getAll('levels');
+  const [t] = useTranslation('global');
+  const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
+  const [searchParams, setSearchParams] = useSearchParams({
+    duration: [minDuration, maxDuration],
+  });
   const duration = searchParams.getAll('duration');
+  const levels = searchParams.getAll('levels');
+  const name = searchParams.get('name');
+  const [skip, setSkip] = useState(0);
+  const [inputMinDuration, setInputMinDuration] = useState(duration[0]);
+  const [inputMaxDuration, setInputMaxDuration] = useState(duration[1]);
+  const [inputName, setInputName] = useState(name);
 
   const {
     data, isLoading,
   } = useQuery(
-    ['courses', skip, levels, duration],
-    async () => getCourses(skip, limit, levels, duration),
+    ['courses', skip, name, levels, duration],
+    async () => getCourses(skip, limit, name, levels, duration),
   );
   const { courses, resultsLength } = data ?? {};
+
+  const handleInputNameChange = (event) => {
+    const { value } = event.target;
+    setInputName(value);
+  };
+
+  const handleNameChange = () => {
+    setSearchParams((prev) => {
+      prev.set('name', inputName);
+      return prev;
+    });
+  };
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
@@ -78,6 +95,24 @@ function Home() {
             {t('courses.results')}
           </p>
         </div>
+        <div className="flex flex-col gap-2">
+          <h6 className="heading-xs mb-2">{t('name')}</h6>
+          <label htmlFor="inputName" className="label-borders !m-0 p-2">
+            <input
+              id="inputName"
+              defaultValue={inputName}
+              onChange={handleInputNameChange}
+            />
+          </label>
+          <button
+            type="button"
+            className="button-primary px-5 py-1 rounded-md self-end"
+            onClick={handleNameChange}
+          >
+            OK
+          </button>
+        </div>
+        <div className="divider-x" />
         <div className="flex flex-col">
           <h6 className="heading-xs mb-2">{t('courses.level')}</h6>
           <label htmlFor="beginner" className="filter-checkbox">
@@ -162,7 +197,7 @@ function Home() {
           </button>
         </div>
       </div>
-      <div className="divider-y" />
+      <div className="divider-y mx-2" />
       {isLoading ? (
         <div className="flex w-full justify-center items-center">
           <Loader />

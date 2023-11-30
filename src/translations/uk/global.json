@@ -1,7 +1,10 @@
 {
   "header": {
     "signIn": "Війти",
-    "signUp": "Зареєструватися"
+    "signUp": "Зареєструватися",
+    "myCourses": "Мої курси",
+    "account": "Аккаунт",
+    "logout": "Вийти"
   },
   "signIn": {
     "title": "Війти",
@@ -15,7 +18,6 @@
   },
   "forum": {
     "yourQuestion": "Ваше питання",
-    "title": "Заголовок",
     "description": "Деталі",
     "questions": "Питання",
     "askQuestion": "Задати питання",
@@ -26,9 +28,17 @@
     "tagsMessage": "Додайте не більше 5 тегів"
   },
   "courses": {
+    "markAsCompleted": "Відмітити як пройдений",
+    "attachFile": "Додати файл",
+    "buy": "Купити",
+    "tasks": "Завдання",
+    "tests": "Тести",
+    "attachements": "Прикріплення",
     "about": "Про курс",
     "courses": "Курси",
     "add": "Додати курс",
+    "addTask": "Додати завдання",
+    "addTest": "Додати тест",
     "addBlock": "Додати розділ",
     "description": "Деталі",
     "create": "Створить курс",
@@ -47,9 +57,18 @@
     "Intermediate": "Середній рівень",
     "Expert": "Експерт",
     "All levels": "Усі рівні",
-    "duration": "Тривалість (години)"
+    "duration": "Тривалість (години)",
+    "titlePlaceholder": "Назва вашого курсу",
+    "lecture": "Лекція",
+    "lecturePlaceholder": "Лекція",
+    "chapterTitlePlaceholder": "Назва розділу",
+    "question": "Запитання",
+    "correctIndexOption": "Правильний варіант"
   },
+  "myCourses": "Мої курси",
+  "title": "Заголовок",
   "name": "Ім'я",
+  "answer": "Відповідь",
   "personal": "Персональні дані",
   "firstName": "Ім'я",
   "firstNamePlaceholder": "Ваше ім'я",

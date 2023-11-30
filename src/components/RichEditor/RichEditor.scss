@@ -1,50 +1,51 @@
-.quill {
-  border-radius: 0.2rem;
-}
+.rich-editor {
+  .ql-snow.ql-container {
+    border-bottom-left-radius: 0.2em;
+    border-bottom-right-radius: 0.2em;
+    background-color: var(--color-theme-primary);
+    /* border: 1px solid var(--color-theme-lines) !important; */
+    // border-top: none !important;
+    /* transition: background-color var(--duration) ease-in-out; */
+    transition: border-width 0s, border-color var(--duration) ease-in-out, background-color var(--duration) ease-in-out;
+  }
 
-.ql-editor {
-  min-height: 14em;
-  // border-color: var(--color-theme-lines) !important;
-}
+  .quill {
+    border-radius: 0.2rem;
+  }
 
-.quill:focus-within {
-  box-shadow: var(--shadow-hover);
-}
+  .ql-editor {
+    min-height: 14em;
+    // border-color: var(--color-theme-lines) !important;
+  }
 
-.quill > .ql-container > .ql-editor.ql-blank::before {
-  color: var(--color-theme-text);
-}
+  .quill:focus-within {
+    box-shadow: var(--shadow-hover);
+  }
 
-.ql-snow.ql-container {
-  border-bottom-left-radius: 0.2em;
-  border-bottom-right-radius: 0.2em;
-  background-color: var(--color-theme-primary);
-  /* border: 1px solid var(--color-theme-lines) !important; */
-  // border-top: none !important;
-  font-size: 18px !important;
-  /* transition: background-color var(--duration) ease-in-out; */
-  transition: border-width 0s, border-color var(--duration) ease-in-out, background-color var(--duration) ease-in-out;
-}
+  .quill > .ql-container > .ql-editor.ql-blank::before {
+    color: var(--color-theme-text);
+  }
 
-.ql-container:focus-within {
-  // border: 1px solid var(--color-light-purple) !important;
-  // border-top: none !important;
-  transition: border-width 0s, border-color var(--duration) ease-in-out;
-}
+  .ql-container:focus-within {
+    // border: 1px solid var(--color-light-purple) !important;
+    // border-top: none !important;
+    transition: border-width 0s, border-color var(--duration) ease-in-out;
+  }
 
-.ql-picker-label {
-  color: var(--color-text) !important;
-  transition: all var(--duration) ease-in-out;
-}
+  .ql-picker-label {
+    color: var(--color-text) !important;
+    transition: all var(--duration) ease-in-out;
+  }
 
-.ql-fill {
-  fill: var(--color-text) !important;
-  transition: all var(--duration) ease-in-out;
-}
+  .ql-fill {
+    fill: var(--color-text) !important;
+    transition: all var(--duration) ease-in-out;
+  }
 
-.ql-stroke {
-  stroke: var(--color-text) !important;
-  transition: all var(--duration) ease-in-out;
+  .ql-stroke {
+    stroke: var(--color-text) !important;
+    transition: all var(--duration) ease-in-out;
+  }
 }
 
 /* .en.quill .ql-picker.ql-size .ql-picker-label::before,

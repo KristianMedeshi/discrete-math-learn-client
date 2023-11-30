@@ -8,7 +8,7 @@ function Pagination({
   const [pages, setNumbers] = useState([]);
 
   const handlePageChange = (page) => {
-    setSkip(limit * (page - 1));
+    setSkip(Math.max(0, limit * (page - 1)));
   };
 
   useEffect(() => {
@@ -19,6 +19,9 @@ function Pagination({
     }
     const pageNumbers = Array.from({ length: last - first }, (_, index) => first + index);
     setNumbers(pageNumbers);
+    if (currentPage >= last) {
+      handlePageChange(last - 1);
+    }
   }, [resultsLength]);
 
   return (

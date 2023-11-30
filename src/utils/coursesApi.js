@@ -1,11 +1,12 @@
 import axiosAPI from './network';
 
-export const getCourses = async (skip, limit, levels, durationRange) => {
+export const getCourses = async (skip, limit, name, levels, durationRange) => {
   try {
     const response = await axiosAPI.get('/courses', {
       params: {
         skip,
         limit,
+        name,
         levels,
         durationRange,
       },
@@ -46,7 +47,37 @@ export const getCourseBlock = async (courseId, blockId) => {
     const response = await axiosAPI.get(`/courses/${courseId}/${blockId}`);
     return response?.data;
   } catch (error) {
-    console.error('Get course error:', error);
+    console.error('Get course block error:', error);
+    throw error;
+  }
+};
+
+export const createCourseChapter = async (id, data) => {
+  try {
+    const response = await axiosAPI.post(`/courses/${id}`, data);
+    return response?.data;
+  } catch (error) {
+    console.error('Post course chapter error:', error);
+    throw error;
+  }
+};
+
+export const buyCourse = async (id) => {
+  try {
+    const response = await axiosAPI.post(`/courses/buy/${id}`);
+    return response?.data;
+  } catch (error) {
+    console.error('Buy course error:', error);
+    throw error;
+  }
+};
+
+export const markAsCompleted = async (id, data) => {
+  try {
+    const response = await axiosAPI.post(`/courses/mark/${id}`, data);
+    return response?.data;
+  } catch (error) {
+    console.error('Mark course block error:', error);
     throw error;
   }
 };

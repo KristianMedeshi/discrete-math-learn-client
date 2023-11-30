@@ -15,6 +15,7 @@ import AskQuestion from './pages/AskQuestion';
 import Account from './pages/Account';
 import Course from './pages/Course';
 import CreateCourse from './pages/CreateCourse';
+import AddCourseChapter from './pages/AddCourseChapter';
 import { setLoggedIn } from './store/authSlice';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
@@ -64,6 +65,7 @@ function App() {
             <Route path="/courses">
               <Route path=":id" element={<Course />} />
               <Route path="add" element={<CreateCourse />} />
+              <Route path=":id/add" element={<AddCourseChapter />} />
             </Route>
           </Route>
         </Routes>

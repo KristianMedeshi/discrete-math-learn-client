@@ -6,7 +6,7 @@ import { useMutation } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import Field from '../../components/Field';
 import RichEditor from '../../components/RichEditor';
-import Image from '../../components/Image/Image';
+import Image from '../../components/Image';
 import { convertToBase64 } from '../../utils/helpers';
 import useDropdown from '../../hooks/useDropdown';
 import levels from '../../constants/levels';
@@ -180,7 +180,7 @@ function CreateCourse() {
           </div>
         </div>
         <RichEditor
-          {...register('description', {
+          registerReturn={register('description', {
             required: t('emptyFieldError'),
             pattern: {
               value: emptyEditorRegex,

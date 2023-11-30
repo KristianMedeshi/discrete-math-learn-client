@@ -1,9 +1,12 @@
 import React from 'react';
-import HTMLReactParser from 'html-react-parser';
 import { useTranslation } from 'react-i18next';
-import { parseHtmlReplace } from '../../utils/helpers';
+import ReactQuill from 'react-quill';
+import useModal from '../../hooks/useModal';
+import ModalContainer from '../../components/ModalContainer';
+import BuyCourseModal from '../../components/BuyCourseModal';
 
 function CourseAbout({ course }) {
+  const { modalOpen, open, close } = useModal();
   const [t] = useTranslation('global');
 
   return (
@@ -13,12 +16,18 @@ function CourseAbout({ course }) {
         <div className="flex flex-col">
           <div className="flex items-center justify-between w-full gap-10">
             <h1 className="heading-m">{course.name}</h1>
-            <p className="heading-s">
+            <button
+              type="button"
+              className="button-primary whitespace-nowrap px-5 cursor-pointer"
+              hidden={course.isBought}
+              onClick={open}
+            >
+              {t('courses.buy')}
               {' '}
               {course.price}
               $
               {' '}
-            </p>
+            </button>
           </div>
           <small className="body-text-s">{course.instructors?.join(', ')}</small>
           <p className="body-text-s text-[#808080]">
@@ -32,8 +41,21 @@ function CourseAbout({ course }) {
         </div>
       </div>
       <div className="body-text-m">
-        {HTMLReactParser(course.description, { replace: parseHtmlReplace })}
+        <ReactQuill
+          value={course.description}
+          readOnly
+          modules={{ toolbar: false }}
+        />
       </div>
+      <ModalContainer>
+        {modalOpen && (
+        <BuyCourseModal
+          modalOpen={modalOpen}
+          handleClose={close}
+          course={course}
+        />
+        )}
+      </ModalContainer>
     </div>
   );
 }

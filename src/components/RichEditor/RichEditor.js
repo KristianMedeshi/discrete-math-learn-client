@@ -1,5 +1,4 @@
 import ReactQuill from 'react-quill';
-import { useTranslation } from 'react-i18next';
 import {
   useEffect, useMemo, useRef, useState,
 } from 'react';
@@ -16,13 +15,12 @@ function RichEditor({
   onChange,
   readOnly = false,
   error,
+  className,
 }) {
   const quillRef = useRef(null);
-  const [, i18n] = useTranslation('global');
   const [valueEditor, setValueEditor] = useState(value);
 
   const imageHandler = () => {
-    console.log('handles image');
     const input = document.createElement('input');
 
     input.setAttribute('type', 'file');
@@ -68,19 +66,18 @@ function RichEditor({
   );
 
   useEffect(() => {
-    console.log('editor', valueEditor);
     onChange(valueEditor);
   }, [valueEditor]);
 
   return (
-    <div className="flex flex-col gap-1 w-full">
+    <div className="flex flex-col gap-1 w-full rich-editor">
       <small hidden={!name} className={`body-text-s ${error ? '!text-red' : ''}`}>
         {name}
         :
       </small>
       <ReactQuill
         ref={quillRef}
-        className={`${i18n.language} ${error ? 'error' : ''}`}
+        className={`${error ? 'error' : ''} ${className}`}
         theme={theme}
         placeholder={placeholder}
         modules={modules}

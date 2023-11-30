@@ -1,6 +1,5 @@
 function Field({
   style,
-  className,
   inputClassName,
   name,
   type,
@@ -19,11 +18,11 @@ function Field({
     <div className="flex flex-col gap-1 w-full" style={style}>
       <small className={`body-text-s ${error ? '!text-red' : ''} whitespace-nowrap`}>
         {name}
-        :
+        {name && ':'}
       </small>
       <label
         htmlFor={name}
-        className={`label-borders flex gap-[12px] items-center ${className} 
+        className={`label-borders flex gap-[12px] items-center bg-primary
           ${error ? 'outline-red outline-2' : ''} 
           ${active ? 'active-focus' : ''}`}
       >
