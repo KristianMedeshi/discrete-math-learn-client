@@ -2,8 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useTranslation } from 'react-i18next';
-import parse from 'html-react-parser';
 import { useForm } from 'react-hook-form';
+import ReactQuill from 'react-quill';
 import RichEditor from '../../components/RichEditor';
 import Image from '../../components/Image';
 import Loading from '../Loading';
@@ -41,7 +41,13 @@ function Question() {
   return (
     <div className="page-wrapper">
       <h1 className="heading-m">{question?.title}</h1>
-      {question?.description && parse(question.description)}
+      {question?.description && (
+      <ReactQuill
+        value={question.description}
+        readOnly
+        modules={{ toolbar: false }}
+      />
+      )}
       <div className="divider-x" />
       <div className="flex flex-col gap-5">
         <form
@@ -85,7 +91,11 @@ function Question() {
             <div
               className="flex flex-col gap-2 p-4 mx-4 rounded-sm hover:bg-secondary"
             >
-              {parse(item.answer)}
+              <ReactQuill
+                value={item.answer}
+                readOnly
+                modules={{ toolbar: false }}
+              />
               <div className="flex items-center gap-3 self-end">
                 <Image className="!w-8 !h-8" imageSrc={item.author.image} />
                 {item.author.fullName}

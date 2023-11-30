@@ -11,8 +11,8 @@ import { convertToBase64 } from '../../utils/helpers';
 import useDropdown from '../../hooks/useDropdown';
 import levels from '../../constants/levels';
 import { createCourse } from '../../utils/coursesApi';
-import './CreateCourse.scss';
 import { emptyEditorRegex, instructorsRegex, numberRegex } from '../../constants/regex';
+import './CreateCourse.scss';
 
 function CreateCourse() {
   const [t] = useTranslation('global');
