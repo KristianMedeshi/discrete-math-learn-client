@@ -142,6 +142,7 @@ function BuyCourseModal({ course, handleClose }) {
             <button
               type="submit"
               className="button-primary"
+              disabled={updateAccountMutation.isLoading || buyCourseMutation.isLoading}
             >
               {t('courses.buy')}
               {' '}

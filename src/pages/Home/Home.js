@@ -106,7 +106,7 @@ function Home() {
           </label>
           <button
             type="button"
-            className="button-primary w-fit py-[2px] self-end"
+            className="button-primary px-5 py-1 rounded-md self-end"
             onClick={handleNameChange}
           >
             OK

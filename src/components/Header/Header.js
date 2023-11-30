@@ -113,14 +113,21 @@ function Header() {
                 />
               </button>
               <div
-                className="menu translate-y-14 -translate-x-12"
+                className="menu translate-y-[76px] -translate-x-12"
                 style={isShownUserMenu ? {} : { display: 'none' }}
               >
+                <Link
+                  to="/courses/my"
+                  className="menu-option whitespace-nowrap"
+                >
+                  {t('myCourses')}
+                </Link>
+                <div className="divider-x" />
                 <Link
                   to="/account"
                   className="menu-option"
                 >
-                  Account
+                  {t('header.account')}
                 </Link>
                 <div className="divider-x" />
                 <button
@@ -128,7 +135,7 @@ function Header() {
                   className="menu-option"
                   onClick={handleLogout}
                 >
-                  Logout
+                  {t('header.logout')}
                 </button>
               </div>
             </div>
