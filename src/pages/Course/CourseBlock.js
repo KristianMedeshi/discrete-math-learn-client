@@ -24,7 +24,6 @@ function CourseBlock({ id }) {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     markCourseMutation.mutate(data);
   };
 

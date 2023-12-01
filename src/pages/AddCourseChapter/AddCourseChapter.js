@@ -62,10 +62,8 @@ function AddCourseChapter() {
   };
 
   const onSubmit = (data) => {
-    console.log('submit', data);
     const formData = new FormData();
     formData.append('jsonData', JSON.stringify(data));
-    console.log(selectedAttachments);
     selectedAttachments.forEach((file) => {
       formData.append('attachments', file);
     });

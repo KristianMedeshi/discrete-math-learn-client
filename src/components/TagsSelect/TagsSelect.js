@@ -15,7 +15,6 @@ function TagsSelect({ tags, onSelect, onRemove }) {
   const handleInputChange = (event) => {
     const { value } = event.target;
     const filtered = [];
-    console.log(i18n.language);
     validTags[i18n.language].forEach((item) => {
       if (item.key.toLowerCase().includes(value.toLowerCase())) {
         filtered.push(item);
