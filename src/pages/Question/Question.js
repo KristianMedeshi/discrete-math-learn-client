@@ -30,7 +30,6 @@ function Question() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     postAnswerMutation.mutate(data);
   };
 

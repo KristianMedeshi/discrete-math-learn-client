@@ -42,7 +42,6 @@ function AskQuestion() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     createQuestionMutation.mutate(data);
   };
 
