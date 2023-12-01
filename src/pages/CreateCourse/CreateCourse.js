@@ -56,7 +56,6 @@ function CreateCourse() {
 
   const onSubmit = (data) => {
     data.instructors = data.instructors.split(',').map((item) => item.trim());
-    console.log(data);
     createCourseMutation.mutate(data);
   };
 
