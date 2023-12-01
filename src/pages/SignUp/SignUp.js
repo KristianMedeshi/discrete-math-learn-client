@@ -99,8 +99,21 @@ function SignUp() {
               },
             })}
             after={isVisiblePassword
-              ? <AiOutlineEye size={20} onClick={() => setIsVisiblePassword(false)} />
-              : <AiOutlineEyeInvisible size={20} onClick={() => setIsVisiblePassword(true)} />}
+              ? (
+                <AiOutlineEye
+                  size={20}
+                  onClick={() => setIsVisiblePassword(false)}
+                  className="cursor-pointer"
+                />
+              )
+              : (
+                <AiOutlineEyeInvisible
+                  size={20}
+                  onClick={() => setIsVisiblePassword(true)}
+                  className="cursor-pointer"
+                />
+              )}
+
           />
         </div>
         <p className="w-full body-text-s text-red">{authError}</p>
