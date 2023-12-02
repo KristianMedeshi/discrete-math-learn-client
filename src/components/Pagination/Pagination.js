@@ -25,7 +25,7 @@ function Pagination({
   }, [resultsLength]);
 
   return (
-    <div className="flex gap-3 justify-center w-full">
+    <div className="flex gap-3 justify-center w-full mt-auto">
       {pages.map((page) => (
         <button
           type="button"
