@@ -81,3 +81,13 @@ export const markAsCompleted = async (id, data) => {
     throw error;
   }
 };
+
+export const getMyCourses = async (params) => {
+  try {
+    const response = await axiosAPI.get('/courses/my', { params });
+    return response?.data;
+  } catch (error) {
+    console.error('Get my courses error:', error);
+    throw error;
+  }
+};
