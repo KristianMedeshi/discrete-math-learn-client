@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useClickAway } from 'react-use';
 import { AiOutlineUser } from 'react-icons/ai';
 import { MdOutlineForum } from 'react-icons/md';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
+import { motion, AnimatePresence } from 'framer-motion';
 import { setLoggedIn } from '../../store/authSlice';
 import './Header.scss';
 
@@ -14,9 +14,7 @@ function Header() {
   const navigate = useNavigate();
   const [t, i18n] = useTranslation('global');
   const [isShownLangMenu, setIsShownLangMenu] = useState(false);
-  const langMenuRef = useRef(null);
   const [isShownUserMenu, setIsShownUserMenu] = useState(false);
-  const userMenuRef = useRef(null);
   const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
   const [isLightTheme, setLightTheme] = useState(localStorage.getItem('theme') === 'light');
 
@@ -30,9 +28,6 @@ function Header() {
     dispatch(setLoggedIn(false));
     navigate('/sign-in');
   };
-
-  useClickAway(langMenuRef, () => setIsShownLangMenu(false));
-  useClickAway(userMenuRef, () => setIsShownUserMenu(false));
 
   const toggleTheme = () => {
     setLightTheme((prevState) => !prevState);
@@ -58,36 +53,44 @@ function Header() {
       <div
         className="flex gap-6 items-center"
       >
-        <div ref={langMenuRef}>
+        <div
+          onMouseEnter={() => setIsShownLangMenu(true)}
+          onMouseLeave={() => setIsShownLangMenu(false)}
+        >
           <button
             type="button"
-            onClick={() => setIsShownLangMenu((value) => !value)}
-            className="button w-[34px] h-[34px]"
+            className="button w-[34px] h-[34px] cursor-pointer"
           >
             {i18n.language}
           </button>
-          <div
-            className="menu body-text-m -translate-x-8"
-            style={isShownLangMenu ? {} : { display: 'none' }}
-          >
-            <button
-              type="button"
-              onClick={() => handleChangeLanguage('en')}
-              className="menu-option wide"
-            >
-              <p className="whitespace-nowrap">English (US)</p>
-              <p>en</p>
-            </button>
-            <div className="divider-x" />
-            <button
-              type="button"
-              onClick={() => handleChangeLanguage('uk')}
-              className="menu-option wide"
-            >
-              <p>Ukraine</p>
-              <p>uk</p>
-            </button>
-          </div>
+          <AnimatePresence>
+            {isShownLangMenu && (
+              <motion.div
+                className="menu body-text-m -translate-x-8"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <button
+                  type="button"
+                  onClick={() => handleChangeLanguage('en')}
+                  className="menu-option wide"
+                >
+                  <p className="whitespace-nowrap">English (US)</p>
+                  <p>en</p>
+                </button>
+                <div className="divider-x" />
+                <button
+                  type="button"
+                  onClick={() => handleChangeLanguage('uk')}
+                  className="menu-option wide"
+                >
+                  <p>Ukraine</p>
+                  <p>uk</p>
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
         <button type="button" className="button" onClick={() => toggleTheme()}>
           {isLightTheme
@@ -100,44 +103,49 @@ function Header() {
               <MdOutlineForum size={22} />
             </Link>
             <div
-              ref={userMenuRef}
+              onMouseEnter={() => setIsShownUserMenu(true)}
+              onMouseLeave={() => setIsShownUserMenu(false)}
               className="flex gap-6 items-center"
             >
-              <button
-                type="button"
+              <div
                 className="button"
-                onClick={() => setIsShownUserMenu((value) => !value)}
               >
                 <AiOutlineUser
                   size={22}
                 />
-              </button>
-              <div
-                className="menu translate-y-[76px] -translate-x-12"
-                style={isShownUserMenu ? {} : { display: 'none' }}
-              >
-                <Link
-                  to="/courses/my"
-                  className="menu-option whitespace-nowrap"
-                >
-                  {t('myCourses')}
-                </Link>
-                <div className="divider-x" />
-                <Link
-                  to="/account"
-                  className="menu-option"
-                >
-                  {t('header.account')}
-                </Link>
-                <div className="divider-x" />
-                <button
-                  type="button"
-                  className="menu-option"
-                  onClick={handleLogout}
-                >
-                  {t('header.logout')}
-                </button>
               </div>
+              <AnimatePresence>
+                {isShownUserMenu && (
+                  <motion.div
+                    className="menu translate-y-[72px] -translate-x-12"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <Link
+                      to="/courses/my"
+                      className="menu-option whitespace-nowrap"
+                    >
+                      {t('myCourses')}
+                    </Link>
+                    <div className="divider-x" />
+                    <Link
+                      to="/account"
+                      className="menu-option"
+                    >
+                      {t('header.account')}
+                    </Link>
+                    <div className="divider-x" />
+                    <button
+                      type="button"
+                      className="menu-option"
+                      onClick={handleLogout}
+                    >
+                      {t('header.logout')}
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </>
         ) : (
