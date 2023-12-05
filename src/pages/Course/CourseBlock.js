@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import ReactQuill from 'react-quill';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import Field from '../../components/Field';
 import { getCourseBlock, markAsCompleted } from '../../utils/coursesApi';
 import Loader from '../../components/Loader';
@@ -11,7 +12,8 @@ import Loader from '../../components/Loader';
 function CourseBlock({ id }) {
   const [t] = useTranslation('global');
   const courseId = useParams().id;
-  const { data, isLoading } = useQuery(`${courseId}/${id}`, () => getCourseBlock(courseId, id));
+  const userId = useSelector((state) => state.auth.userId);
+  const { data, isLoading } = useQuery(`${userId}/${courseId}/${id}`, () => getCourseBlock(courseId, id));
   const { block } = data || {};
 
   const { register, control, handleSubmit } = useForm({ shouldFocusError: false });

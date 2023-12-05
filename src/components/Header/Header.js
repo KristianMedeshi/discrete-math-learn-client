@@ -6,7 +6,7 @@ import { MdOutlineForum } from 'react-icons/md';
 import { FiSun, FiMoon } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
-import { setLoggedIn } from '../../store/authSlice';
+import { setUserId } from '../../store/authSlice';
 import './Header.scss';
 
 function Header() {
@@ -15,7 +15,7 @@ function Header() {
   const [t, i18n] = useTranslation('global');
   const [isShownLangMenu, setIsShownLangMenu] = useState(false);
   const [isShownUserMenu, setIsShownUserMenu] = useState(false);
-  const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
+  const userId = useSelector((store) => store.auth.userId);
   const [isLightTheme, setLightTheme] = useState(localStorage.getItem('theme') === 'light');
 
   const handleChangeLanguage = (lang) => {
@@ -25,7 +25,9 @@ function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    dispatch(setLoggedIn(false));
+    localStorage.removeItem('userId');
+    dispatch(setUserId(null));
+    setIsShownUserMenu(false);
     navigate('/sign-in');
   };
 
@@ -97,7 +99,7 @@ function Header() {
             ? <FiSun size={22} />
             : <FiMoon size={22} />}
         </button>
-        {isLoggedIn ? (
+        {userId ? (
           <>
             <Link to="forum" className="button">
               <MdOutlineForum size={22} />
@@ -125,6 +127,7 @@ function Header() {
                     <Link
                       to="/courses/my"
                       className="menu-option whitespace-nowrap"
+                      onClick={() => setIsShownUserMenu(false)}
                     >
                       {t('myCourses')}
                     </Link>
@@ -132,6 +135,7 @@ function Header() {
                     <Link
                       to="/account"
                       className="menu-option"
+                      onClick={() => setIsShownUserMenu(false)}
                     >
                       {t('header.account')}
                     </Link>

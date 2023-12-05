@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import ReactQuill from 'react-quill';
+import { useSelector } from 'react-redux';
 import RichEditor from '../../components/RichEditor';
 import Image from '../../components/Image';
 import Loading from '../Loading';
@@ -14,7 +15,8 @@ import { emptyEditorRegex } from '../../constants/regex';
 function Question() {
   const [t, i18n] = useTranslation('global');
   const { questionId } = useParams();
-  const { data, isLoading } = useQuery(questionId, () => getQuestion(questionId));
+  const userId = useSelector((state) => state.auth.userId);
+  const { data, isLoading } = useQuery(`${userId}/${questionId}`, () => getQuestion(questionId));
   const { question, answers } = data || {};
   const {
     register, formState: { errors }, handleSubmit, getValues, setValue,

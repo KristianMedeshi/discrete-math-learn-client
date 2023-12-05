@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FaCheck, FaLock } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 import Loading from '../Loading';
 import CourseAbout from './CourseAbout';
 import CourseBlock from './CourseBlock';
@@ -14,7 +15,8 @@ function Course() {
   const { id } = useParams();
   const [searchParams, setSearchParams] = useSearchParams();
   const blockParam = searchParams.get('block');
-  const { data, isLoading } = useQuery(`courses/${id}`, async () => getCourse(id));
+  const userId = useSelector((state) => state.auth.userId);
+  const { data, isLoading } = useQuery(`${userId}/courses/${id}`, async () => getCourse(id));
   const { course, blocks } = data ?? {};
 
   const setBlock = (block) => {

@@ -3,9 +3,9 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 function AuthGuard() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const userId = useSelector((state) => state.auth.userId);
 
-  return isLoggedIn ? <Outlet /> : <Navigate to="/sign-in" replace />;
+  return userId ? <Outlet /> : <Navigate to="/sign-in" replace />;
 }
 
 export default AuthGuard;

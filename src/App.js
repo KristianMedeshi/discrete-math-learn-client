@@ -17,7 +17,7 @@ import Course from './pages/Course';
 import CreateCourse from './pages/CreateCourse';
 import AddCourseChapter from './pages/AddCourseChapter';
 import MyCourses from './pages/MyCourses';
-import { setLoggedIn } from './store/authSlice';
+import { setUserId } from './store/authSlice';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import './App.css';
@@ -36,7 +36,9 @@ function App() {
     };
 
     const checkJwtExpiration = () => {
-      dispatch(setLoggedIn(!isJwtExpired(localStorage.getItem('token'))));
+      if (isJwtExpired(localStorage.getItem('token'))) {
+        dispatch(setUserId(null));
+      }
     };
 
     checkJwtExpiration();

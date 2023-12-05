@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import Image from '../../components/Image';
 import Loading from '../Loading';
 import { getQuestions } from '../../utils/forumApi';
@@ -10,7 +11,8 @@ import formatDate from '../../utils/date';
 function Forum() {
   const [t, i18n] = useTranslation('global');
   const [tTags] = useTranslation('tags');
-  const { data: questions, isLoading } = useQuery('questions', getQuestions);
+  const userId = useSelector((state) => state.auth.userId);
+  const { data: questions, isLoading } = useQuery(`${userId}/questions`, getQuestions);
 
   if (isLoading) {
     return <Loading />;

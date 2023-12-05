@@ -16,7 +16,7 @@ function Home() {
   const minDuration = 0;
   const maxDuration = 100;
   const [t] = useTranslation('global');
-  const isLoggedIn = useSelector((store) => store.auth.isLoggedIn);
+  const userId = useSelector((store) => store.auth.userId);
   const [searchParams, setSearchParams] = useSearchParams({
     duration: [minDuration, maxDuration],
   });
@@ -206,7 +206,7 @@ function Home() {
         <div className="flex flex-col w-full gap-5">
           <div className="flex justify-between">
             <h1 className="heading-m mx-10">{t('courses.courses')}</h1>
-            <Link to="/courses/add" className="button-primary px-5" hidden={!isLoggedIn}>
+            <Link to="/courses/add" className="button-primary px-5" hidden={!userId}>
               {t('courses.add')}
             </Link>
           </div>

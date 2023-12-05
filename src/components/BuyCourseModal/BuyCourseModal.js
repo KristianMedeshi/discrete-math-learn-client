@@ -2,13 +2,14 @@ import { motion } from 'framer-motion';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import Backdrop from '../Backdrop';
 import Field from '../Field';
 import Loader from '../Loader';
 import Image from '../Image';
 import { buyCourse } from '../../utils/coursesApi';
 import { getMyInfo, updateMyInfo } from '../../utils/usersApi';
-import { correctInputCardNumber, correctInputExpiry } from '../../utils/helpers';
+import { correctInputCardNumber, correctInputExpiry, flattenNestedObject } from '../../utils/helpers';
 import { cardCvvRegex, cardExpiryRegex, cardNumberRegex } from '../../constants/regex';
 import dropIn from '../../constants/dropInAnimation';
 
@@ -18,7 +19,8 @@ function BuyCourseModal({ course, handleClose }) {
     register, reset, formState: { errors }, handleSubmit,
   } = useForm({ shouldFocusError: false });
 
-  const { isLoading } = useQuery('info', getMyInfo, {
+  const userId = useSelector((state) => state.auth.userId);
+  const { isLoading } = useQuery(`${userId}/info`, getMyInfo, {
     onSuccess: (data) => {
       reset(data?.user, { keepErrors: true, keepDirtyValues: true });
     },
@@ -39,8 +41,11 @@ function BuyCourseModal({ course, handleClose }) {
   });
 
   const onSubmit = (data) => {
+    data = flattenNestedObject(data);
     const formData = new FormData();
-    formData.append('jsonData', JSON.stringify(data));
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
     updateAccountMutation.mutate(formData);
   };
 

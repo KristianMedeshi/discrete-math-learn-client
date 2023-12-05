@@ -1,4 +1,3 @@
-import React from 'react';
 import { specSymbolRegex } from '../constants/regex';
 
 const digitRegex = /^\d$/;
@@ -83,33 +82,23 @@ export const convertToBase64 = (file) => new Promise((resolve, reject) => {
   fileReader.readAsDataURL(file);
 });
 
-export const parseHtmlReplace = (domNode) => {
-  if (domNode.type === 'text') {
-    return domNode.data;
-  }
-
-  if (domNode.name === 'br') {
-    return <br />;
-  }
-
-  if (domNode.name === 'ol') {
-    return (
-      <ol style={{ listStyleType: 'decimal' }}>
-        <div style={{ paddingLeft: '20px' }}>
-          {domNode.children && domNode.children.map((child, index) => (
-            <React.Fragment key={index}>{parseHtmlReplace(child)}</React.Fragment>
-          ))}
-
-        </div>
-      </ol>
-    );
-  }
-
-  return (
-    <domNode.name {...domNode.attribs}>
-      {domNode.children && domNode.children.map((child, index) => (
-        <React.Fragment key={index}>{parseHtmlReplace(child)}</React.Fragment>
-      ))}
-    </domNode.name>
-  );
-};
+export const flattenNestedObject = (obj, prefix = '') => (
+  Object.keys(obj).reduce((acc, k) => {
+    const pre = prefix.length ? `${prefix}.` : '';
+    if (Array.isArray(obj[k])) {
+      obj[k].forEach((item, index) => {
+        const arrayKey = `${pre}${k}[${index}]`;
+        if (typeof item === 'object' && item !== null) {
+          Object.assign(acc, flattenNestedObject(item, arrayKey));
+        } else {
+          acc[arrayKey] = item;
+        }
+      });
+    } else if (typeof obj[k] === 'object' && obj[k] !== null) {
+      Object.assign(acc, flattenNestedObject(obj[k], pre + k));
+    } else {
+      acc[pre + k] = obj[k];
+    }
+    return acc;
+  }, {})
+);

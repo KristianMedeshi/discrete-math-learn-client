@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import { useTranslation } from 'react-i18next';
 import { useForm, useWatch } from 'react-hook-form';
 import {
   AiOutlineEye, AiOutlineEyeInvisible,
 } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 import Field from '../../components/Field';
 import Image from '../../components/Image';
 import Loading from '../Loading';
 import { getMyInfo, updateMyInfo } from '../../utils/usersApi';
-import './Account.css';
 import {
   cardCvvRegex, cardExpiryRegex, cardNumberRegex, emailRegex, lettersRegex, passwordRegex,
 } from '../../constants/regex';
 import {
-  convertToBase64, correctInputCardNumber, correctInputExpiry,
+  convertToBase64, correctInputCardNumber, correctInputExpiry, flattenNestedObject,
 } from '../../utils/helpers';
+import './Account.css';
 
 function Account() {
   const [t] = useTranslation('global');
@@ -23,9 +24,10 @@ function Account() {
   const {
     register, formState: { errors }, reset, handleSubmit, control,
   } = useForm({ shouldFocusError: true });
-  const newImage = useWatch({ name: 'newImage', control });
+  const image = useWatch({ name: 'image', control });
   const [imageSrc, setImageSrc] = useState();
-  const { data, isLoading } = useQuery('info', getMyInfo, {
+  const userId = useSelector((state) => state.auth.userId);
+  const { data, isLoading } = useQuery(`${userId}/info`, getMyInfo, {
     onSuccess: (data) => {
       reset(data?.user, { keepDirtyValues: true });
       setImageSrc((prev) => prev ?? data?.user?.image);
@@ -34,8 +36,8 @@ function Account() {
   const { user } = data ?? {};
 
   useEffect(() => {
-    if (newImage?.[0]) {
-      convertToBase64(newImage[0])
+    if (image?.[0]) {
+      convertToBase64(image[0])
         .then((base64String) => {
           setImageSrc(base64String);
         })
@@ -43,22 +45,26 @@ function Account() {
           console.error('Error converting to base64:', error.name);
         });
     }
-  }, [newImage]);
+  }, [image]);
 
   const updateAccountMutation = useMutation(updateMyInfo);
 
   const isObject = (obj) => typeof obj === 'object';
+  // eslint-disable-next-line no-unused-vars
   const removeEmpty = (obj) => Object.fromEntries(
     Object.entries(obj)
       .map(([k, v]) => [k, isObject(v) ? removeEmpty(v) : v])
       .filter(([, v]) => v && (!isObject(v) || Object.keys(v).length > 0)),
   );
 
+  const formEl = useRef(null);
   const onSubmit = (data) => {
-    const formData = new FormData();
-    formData.append('newImage', data?.newImage?.[0]);
     data = removeEmpty(data);
-    formData.append('jsonData', JSON.stringify(data));
+    data = flattenNestedObject(data);
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
     updateAccountMutation.mutate(formData);
   };
 
@@ -69,6 +75,7 @@ function Account() {
   return (
     <div className="page-wrapper">
       <form
+        ref={formEl}
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-10 w-full"
       >
@@ -84,7 +91,7 @@ function Account() {
               multiple={false}
               type="file"
               accept="image/png, image/jpeg"
-              {...register('newImage')}
+              {...register('image')}
             />
             {imageSrc && <Image imageSrc={imageSrc} />}
           </label>

@@ -9,7 +9,7 @@ import {
 } from 'react-icons/ai';
 import Field from '../../components/Field';
 import { signIn } from '../../utils/usersApi';
-import { setLoggedIn } from '../../store/authSlice';
+import { setUserId } from '../../store/authSlice';
 
 function SignIn() {
   const [t] = useTranslation('global');
@@ -24,7 +24,8 @@ function SignIn() {
   const signInMutation = useMutation(signIn, {
     onSuccess: (data) => {
       localStorage.setItem('token', data.token);
-      dispatch(setLoggedIn(true));
+      localStorage.setItem('userId', data.userId);
+      dispatch(setUserId(data.userId));
       navigate('/');
     },
     onError: (error) => {
