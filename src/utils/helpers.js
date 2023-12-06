@@ -81,24 +81,3 @@ export const convertToBase64 = (file) => new Promise((resolve, reject) => {
   fileReader.onerror = (error) => reject(error);
   fileReader.readAsDataURL(file);
 });
-
-export const flattenNestedObject = (obj, prefix = '') => (
-  Object.keys(obj).reduce((acc, k) => {
-    const pre = prefix.length ? `${prefix}.` : '';
-    if (Array.isArray(obj[k])) {
-      obj[k].forEach((item, index) => {
-        const arrayKey = `${pre}${k}[${index}]`;
-        if (typeof item === 'object' && item !== null) {
-          Object.assign(acc, flattenNestedObject(item, arrayKey));
-        } else {
-          acc[arrayKey] = item;
-        }
-      });
-    } else if (typeof obj[k] === 'object' && obj[k] !== null) {
-      Object.assign(acc, flattenNestedObject(obj[k], pre + k));
-    } else {
-      acc[pre + k] = obj[k];
-    }
-    return acc;
-  }, {})
-);

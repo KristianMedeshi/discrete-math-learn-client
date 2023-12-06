@@ -9,7 +9,7 @@ import Loader from '../Loader';
 import Image from '../Image';
 import { buyCourse } from '../../utils/coursesApi';
 import { getMyInfo, updateMyInfo } from '../../utils/usersApi';
-import { correctInputCardNumber, correctInputExpiry, flattenNestedObject } from '../../utils/helpers';
+import { correctInputCardNumber, correctInputExpiry } from '../../utils/helpers';
 import { cardCvvRegex, cardExpiryRegex, cardNumberRegex } from '../../constants/regex';
 import dropIn from '../../constants/dropInAnimation';
 
@@ -41,7 +41,6 @@ function BuyCourseModal({ course, handleClose }) {
   });
 
   const onSubmit = (data) => {
-    data = flattenNestedObject(data);
     const formData = new FormData();
     Object.entries(data).forEach(([key, value]) => {
       formData.append(key, value);
@@ -87,7 +86,7 @@ function BuyCourseModal({ course, handleClose }) {
                 error={errors.card?.number}
                 onKeyDown={correctInputCardNumber}
                 placeholder={t('card.numberPlaceholder')}
-                registerReturn={register('card.number', {
+                registerReturn={register('cardNumber', {
                   required: t('emptyFieldError'),
                   pattern: {
                     value: cardNumberRegex,
@@ -101,7 +100,7 @@ function BuyCourseModal({ course, handleClose }) {
                 type="text"
                 error={errors.card?.cvv}
                 placeholder={t('card.cvvPlaceholder')}
-                registerReturn={register('card.cvv', {
+                registerReturn={register('cardCvv', {
                   required: t('emptyFieldError'),
                   pattern: {
                     value: cardCvvRegex,
@@ -116,7 +115,7 @@ function BuyCourseModal({ course, handleClose }) {
                 onKeyDown={correctInputExpiry}
                 error={errors.card?.expiry}
                 placeholder={t('card.expiryPlaceholder')}
-                registerReturn={register('card.expiry', {
+                registerReturn={register('cardExpiry', {
                   required: t('emptyFieldError'),
                   pattern: {
                     value: cardExpiryRegex,

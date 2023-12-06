@@ -14,7 +14,7 @@ import {
   cardCvvRegex, cardExpiryRegex, cardNumberRegex, emailRegex, lettersRegex, passwordRegex,
 } from '../../constants/regex';
 import {
-  convertToBase64, correctInputCardNumber, correctInputExpiry, flattenNestedObject,
+  convertToBase64, correctInputCardNumber, correctInputExpiry,
 } from '../../utils/helpers';
 import './Account.css';
 
@@ -22,14 +22,18 @@ function Account() {
   const [t] = useTranslation('global');
   const [isVisiblePassword, setIsVisiblePassword] = useState(false);
   const {
-    register, formState: { errors }, reset, handleSubmit, control,
+    register, formState: { errors }, setValue, getFieldState, handleSubmit, control,
   } = useForm({ shouldFocusError: true });
   const image = useWatch({ name: 'image', control });
   const [imageSrc, setImageSrc] = useState();
   const userId = useSelector((state) => state.auth.userId);
   const { data, isLoading } = useQuery(`${userId}/info`, getMyInfo, {
     onSuccess: (data) => {
-      reset(data?.user, { keepDirtyValues: true });
+      ['email', 'firstName', 'lastName', 'cardNumber', 'cardCvv', 'cardExpiry'].forEach((key) => {
+        if (!getFieldState(key).isDirty) {
+          setValue(key, data?.user[key], { shouldDirty: true });
+        }
+      });
       setImageSrc((prev) => prev ?? data?.user?.image);
     },
   });
@@ -60,8 +64,10 @@ function Account() {
   const formEl = useRef(null);
   const onSubmit = (data) => {
     data = removeEmpty(data);
-    data = flattenNestedObject(data);
     const formData = new FormData();
+    if (typeof data.image === 'string') {
+      delete data.image;
+    }
     Object.entries(data).forEach(([key, value]) => {
       formData.append(key, value);
     });
@@ -109,7 +115,7 @@ function Account() {
                 type="text"
                 placeholder={t('firstNamePlaceholder')}
                 error={errors.name?.first}
-                registerReturn={register('name.first', {
+                registerReturn={register('firstName', {
                   required: t('emptyFieldError'),
                   pattern: {
                     value: lettersRegex,
@@ -122,7 +128,7 @@ function Account() {
                 type="text"
                 placeholder={t('lastNamePlaceholder')}
                 error={errors.name?.last}
-                registerReturn={register('name.last', {
+                registerReturn={register('lastName', {
                   required: t('emptyFieldError'),
                   pattern: {
                     value: lettersRegex,
@@ -181,12 +187,12 @@ function Account() {
             <h3 className="heading-s">{t('card.card')}</h3>
             <div>
               <Field
-                name={t('card.number')}
+                name={t('card.Number')}
                 type="text"
                 error={errors.card?.number}
                 onKeyDown={correctInputCardNumber}
                 placeholder={t('card.numberPlaceholder')}
-                registerReturn={register('card.number', {
+                registerReturn={register('cardNumber', {
                   pattern: {
                     value: cardNumberRegex,
                     message: t('invalidFormatError'),
@@ -199,7 +205,7 @@ function Account() {
                 type="text"
                 error={errors.card?.cvv}
                 placeholder={t('card.cvvPlaceholder')}
-                registerReturn={register('card.cvv', {
+                registerReturn={register('cardCvv', {
                   pattern: {
                     value: cardCvvRegex,
                     message: t('invalidFormatError'),
@@ -213,7 +219,7 @@ function Account() {
                 onKeyDown={correctInputExpiry}
                 error={errors.card?.expiry}
                 placeholder={t('card.expiryPlaceholder')}
-                registerReturn={register('card.expiry', {
+                registerReturn={register('cardExpiry', {
                   pattern: {
                     value: cardExpiryRegex,
                     message: t('invalidFormatError'),
