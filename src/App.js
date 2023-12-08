@@ -20,7 +20,7 @@ import MyCourses from './pages/MyCourses';
 import { setUserId } from './store/authSlice';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
-import './App.css';
+import './App.scss';
 
 function App() {
   const dispatch = useDispatch();

@@ -2,11 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactQuill from 'react-quill';
 import useModal from '../../hooks/useModal';
-import ModalContainer from '../../components/ModalContainer';
 import BuyCourseModal from '../../components/BuyCourseModal';
 
 function CourseAbout({ course }) {
-  const { modalOpen, open, close } = useModal();
+  const [modalOpen, open, close] = useModal();
   const [t] = useTranslation('global');
 
   return (
@@ -47,15 +46,11 @@ function CourseAbout({ course }) {
           modules={{ toolbar: false }}
         />
       </div>
-      <ModalContainer>
-        {modalOpen && (
-        <BuyCourseModal
-          modalOpen={modalOpen}
-          handleClose={close}
-          course={course}
-        />
-        )}
-      </ModalContainer>
+      <BuyCourseModal
+        isOpen={modalOpen}
+        handleClose={close}
+        course={course}
+      />
     </div>
   );
 }

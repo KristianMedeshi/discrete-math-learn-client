@@ -187,7 +187,7 @@ function Account() {
             <h3 className="heading-s">{t('card.card')}</h3>
             <div>
               <Field
-                name={t('card.Number')}
+                name={t('card.number')}
                 type="text"
                 error={errors.card?.number}
                 onKeyDown={correctInputCardNumber}

@@ -21,6 +21,8 @@
     "description": "Деталі",
     "questions": "Питання",
     "askQuestion": "Задати питання",
+    "deleteQuestion": "Ви впевнені, що хочете видалити це питання?",
+    "deleteQuestionHeader": "Видалити питання",
     "titlePlaceholder": "Задайде ваше питання",
     "descriptionPlaceholder": "Розпишіть ваше питання детальніше",
     "answerPlaceholder": "Напишіть свою відповідь",
@@ -65,6 +67,9 @@
     "question": "Запитання",
     "correctIndexOption": "Правильний варіант"
   },
+  "edit": "Редагувати",
+  "delete": "Видалити",
+  "cancel": "Відмінити",
   "myCourses": "Мої курси",
   "title": "Заголовок",
   "name": "Ім'я",

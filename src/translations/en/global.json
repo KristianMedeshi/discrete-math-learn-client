@@ -20,6 +20,8 @@
     "description": "Description",
     "questions": "Questions",
     "askQuestion": "Ask Question",
+    "deleteQuestion": "Are you sure you want to delete this question?",
+    "deleteQuestionHeader": "Delete question",
     "titlePlaceholder": "Ask your question",
     "descriptionPlaceholder": "Describe your question in details",
     "answerPlaceholder": "Write your answer",
@@ -64,6 +66,9 @@
     "question": "Question",
     "correctIndexOption": "Correct option"
   },
+  "edit": "Edit",
+  "delete": "Delete",
+  "cancel": "Cancel",
   "myCourses": "My courses",
   "title": "Title",
   "name": "Name",

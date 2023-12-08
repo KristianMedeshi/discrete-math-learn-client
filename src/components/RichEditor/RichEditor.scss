@@ -1,14 +1,4 @@
 .rich-editor {
-  .ql-snow.ql-container {
-    border-bottom-left-radius: 0.2em;
-    border-bottom-right-radius: 0.2em;
-    background-color: var(--color-theme-primary);
-    /* border: 1px solid var(--color-theme-lines) !important; */
-    // border-top: none !important;
-    /* transition: background-color var(--duration) ease-in-out; */
-    transition: border-width 0s, border-color var(--duration) ease-in-out, background-color var(--duration) ease-in-out;
-  }
-
   .quill {
     border-radius: 0.2rem;
   }

@@ -5,7 +5,6 @@ import {
 import { uploadSingle } from '../../utils/network';
 import './RichEditor.scss';
 import './Snow.scss';
-import './Bubble.scss';
 
 function RichEditor({
   theme = 'snow',

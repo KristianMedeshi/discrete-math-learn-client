@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm, useWatch } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQueryClient } from 'react-query';
+import { useSelector } from 'react-redux';
 import Field from '../../components/Field';
 import RichEditor from '../../components/RichEditor';
 import TagsSelect from '../../components/TagsSelect';
@@ -9,6 +10,7 @@ import { createQuestion } from '../../utils/forumApi';
 
 function AskQuestion() {
   const [t] = useTranslation('global');
+  const userId = useSelector((state) => state.auth.userId);
   const {
     setValue, getValues, control, register, formState: { errors }, handleSubmit,
   } = useForm({
@@ -36,7 +38,7 @@ function AskQuestion() {
   const queryClient = useQueryClient();
   const createQuestionMutation = useMutation(createQuestion, {
     onSuccess: () => {
-      queryClient.invalidateQueries('questions');
+      queryClient.invalidateQueries(`${userId}/questions`);
       navigate('/forum');
     },
   });
