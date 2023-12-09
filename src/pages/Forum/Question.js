@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdMoreVert } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQueryClient } from 'react-query';
@@ -12,8 +12,9 @@ import formatDate from '../../utils/date';
 import { deleteQuestion } from '../../utils/forumApi';
 
 function Question({ question }) {
-  const userId = useSelector((state) => state.auth.userId);
   const [t] = useTranslation('global');
+  const navigate = useNavigate();
+  const userId = useSelector((state) => state.auth.userId);
   const [tTags, i18n] = useTranslation('tags');
   const [modalOpen, setModalOpen] = useState(false);
   const open = () => setModalOpen(true);
@@ -82,6 +83,7 @@ function Question({ question }) {
           isOpen={modalOpen}
           handleClose={close}
           className="right-3 top-10"
+          onEdit={() => navigate(`/forum/edit/${question._id}`)}
           onDelete={openDeleteModal}
         />
         )}

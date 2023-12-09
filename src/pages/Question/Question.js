@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import ReactQuill from 'react-quill';
 import { useSelector } from 'react-redux';
 import { MdMoreVert } from 'react-icons/md';
@@ -34,8 +34,9 @@ function Question() {
   const { data, isLoading } = useQuery(`${userId}/${questionId}`, () => getQuestion(questionId));
   const { question, answers } = data || {};
   const {
-    register, formState: { errors }, handleSubmit, getValues, setValue,
+    register, formState: { errors }, handleSubmit, setValue, control,
   } = useForm({ shouldFocusError: false });
+  const answer = useWatch({ control, name: 'answer' });
 
   const queryClient = useQueryClient();
   const postAnswerMutation = useMutation(async (postData) => {
@@ -86,6 +87,7 @@ function Question() {
           isOpen={modalOpen}
           handleClose={close}
           className="right-5 top-16"
+          onEdit={() => navigate(`/forum/edit/${question._id}`)}
           onDelete={openDeleteModal}
         />
         )}
@@ -113,9 +115,9 @@ function Question() {
               name={undefined}
               error={errors.answer}
               placeholder={t('forum.answerPlaceholder')}
-              value={() => getValues('answer')}
+              value={answer}
               onChange={(value) => setValue('answer', value, {
-                shouldValidate: getValues('answer'),
+                shouldValidate: answer,
               })}
             />
             <button

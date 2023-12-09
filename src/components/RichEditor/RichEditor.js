@@ -68,6 +68,12 @@ function RichEditor({
     onChange(valueEditor);
   }, [valueEditor]);
 
+  useEffect(() => {
+    if (value !== valueEditor) {
+      setValueEditor(value);
+    }
+  }, [value]);
+
   return (
     <div className="flex flex-col gap-1 w-full rich-editor">
       <small hidden={!name} className={`body-text-s ${error ? '!text-red' : ''}`}>
