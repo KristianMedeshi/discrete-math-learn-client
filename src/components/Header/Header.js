@@ -20,6 +20,7 @@ function Header() {
 
   const handleChangeLanguage = (lang) => {
     i18n.changeLanguage(lang);
+    localStorage.setItem('language', lang);
     setIsShownLangMenu(false);
   };
 

@@ -15,7 +15,7 @@ import './index.css';
 
 i18next.init({
   interpolation: { escapeValue: true },
-  lng: 'en',
+  lng: localStorage.getItem('language') ?? 'en',
   resources: {
     en: {
       global: globalEn,

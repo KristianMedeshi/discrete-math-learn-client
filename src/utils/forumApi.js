@@ -34,6 +34,26 @@ export const getQuestion = async (questionId) => {
   }
 };
 
+export const updateQuestion = async (questionId, data) => {
+  try {
+    const response = await axiosAPI.patch(`/forum/${questionId}`, data);
+    return response?.data;
+  } catch (error) {
+    console.error('Update question error:', error);
+    throw error;
+  }
+};
+
+export const deleteQuestion = async (questionId) => {
+  try {
+    const response = await axiosAPI.delete(`/forum/${questionId}`);
+    return response?.data;
+  } catch (error) {
+    console.error('Delete question error:', error);
+    throw error;
+  }
+};
+
 export const createAnswer = async (id, data) => {
   try {
     const response = await axiosAPI.post(`/forum/${id}`, data, {

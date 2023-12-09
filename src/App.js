@@ -20,7 +20,8 @@ import MyCourses from './pages/MyCourses';
 import { setUserId } from './store/authSlice';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
-import './App.css';
+import './App.scss';
+import EditQuestion from './pages/EditQuestion/EditQuestion';
 
 function App() {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ function App() {
             <Route path="/forum">
               <Route path="" element={<Forum />} />
               <Route path=":questionId" element={<Question />} />
+              <Route path="edit/:questionId" element={<EditQuestion />} />
               <Route path="ask" element={<AskQuestion />} />
             </Route>
             <Route path="/account" element={<Account />} />

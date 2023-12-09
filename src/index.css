@@ -8,7 +8,8 @@
   --color-lines-light: #bbbbbb; /* #d1d7dc #e4ebfa; */
   --color-lines-dark: #3e3f4e;
   --color-borders: #cfcfcf;
-  --color-red: #ff3939;
+  --color-red: #ff3939; /*#cc0000 */
+  --color-hover-red: #990000; /*#c82222*/
   --shadow-hover: 0 0 24px 0 rgba(99, 60, 255, 0.2);
   --transition-param: box-shadow 0.2s ease-in-out;
   --color-very-dark-grey-bg: #2b2c37;

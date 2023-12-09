@@ -5,7 +5,6 @@ import {
 import { uploadSingle } from '../../utils/network';
 import './RichEditor.scss';
 import './Snow.scss';
-import './Bubble.scss';
 
 function RichEditor({
   theme = 'snow',
@@ -68,6 +67,12 @@ function RichEditor({
   useEffect(() => {
     onChange(valueEditor);
   }, [valueEditor]);
+
+  useEffect(() => {
+    if (value !== valueEditor) {
+      setValueEditor(value);
+    }
+  }, [value]);
 
   return (
     <div className="flex flex-col gap-1 w-full rich-editor">
