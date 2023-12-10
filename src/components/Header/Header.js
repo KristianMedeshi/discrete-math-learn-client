@@ -7,7 +7,7 @@ import { FiSun, FiMoon } from 'react-icons/fi';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion, AnimatePresence } from 'framer-motion';
 import { setUserId } from '../../store/authSlice';
-import './Header.scss';
+import { setThemeIsDark } from '../../store/themeSlice';
 
 function Header() {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ function Header() {
   const [isShownLangMenu, setIsShownLangMenu] = useState(false);
   const [isShownUserMenu, setIsShownUserMenu] = useState(false);
   const userId = useSelector((store) => store.auth.userId);
-  const [isLightTheme, setLightTheme] = useState(localStorage.getItem('theme') === 'light');
+  const isDarkTheme = useSelector((store) => store.theme.isDark);
 
   const handleChangeLanguage = (lang) => {
     i18n.changeLanguage(lang);
@@ -33,13 +33,13 @@ function Header() {
   };
 
   const toggleTheme = () => {
-    setLightTheme((prevState) => !prevState);
+    dispatch(setThemeIsDark(!isDarkTheme));
   };
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', !isLightTheme);
-    localStorage.setItem('theme', isLightTheme ? 'light' : 'dark');
-  }, [isLightTheme]);
+    document.documentElement.classList.toggle('dark', isDarkTheme);
+    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+  }, [isDarkTheme]);
 
   return (
     <div
@@ -48,7 +48,7 @@ function Header() {
     >
       <Link to="/">
         <img
-          src={`/logoTheme${isLightTheme ? 'Light' : 'Dark'}.svg`}
+          src={`/logoTheme${isDarkTheme ? 'Dark' : 'Light'}.svg`}
           alt=""
           className="h-12"
         />
@@ -69,7 +69,7 @@ function Header() {
           <AnimatePresence>
             {isShownLangMenu && (
               <motion.div
-                className="menu body-text-m -translate-x-8"
+                className="menu body-text-m -translate-x-8 w-[150px]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -77,7 +77,7 @@ function Header() {
                 <button
                   type="button"
                   onClick={() => handleChangeLanguage('en')}
-                  className="menu-option wide"
+                  className="menu-option"
                 >
                   <p className="whitespace-nowrap">English (US)</p>
                   <p>en</p>
@@ -86,7 +86,7 @@ function Header() {
                 <button
                   type="button"
                   onClick={() => handleChangeLanguage('uk')}
-                  className="menu-option wide"
+                  className="menu-option"
                 >
                   <p>Ukraine</p>
                   <p>uk</p>
@@ -95,14 +95,14 @@ function Header() {
             )}
           </AnimatePresence>
         </div>
-        <button type="button" className="button" onClick={() => toggleTheme()}>
-          {isLightTheme
-            ? <FiSun size={22} />
-            : <FiMoon size={22} />}
+        <button type="button" className="nav-button" onClick={() => toggleTheme()}>
+          {isDarkTheme
+            ? <FiMoon size={22} />
+            : <FiSun size={22} />}
         </button>
         {userId ? (
           <>
-            <Link to="forum" className="button">
+            <Link to="forum" className="nav-button">
               <MdOutlineForum size={22} />
             </Link>
             <div
@@ -111,7 +111,7 @@ function Header() {
               className="flex gap-6 items-center"
             >
               <div
-                className="button"
+                className="nav-button"
               >
                 <AiOutlineUser
                   size={22}

@@ -91,6 +91,16 @@ label {
   box-shadow: var(--shadow-hover);
 }
 
+.nav-button {
+  padding: 6px;
+  border-radius: 8px;
+  transition: border 0s, background-color var(--duration) ease-in-out;
+
+  &:hover {
+    background-color: var(--color-theme-secondary);
+  }
+}
+
 .divider-x {
   height: 1px;
   background-color: var(--color-theme-lines);

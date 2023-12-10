@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import AuthGuard from './components/AuthGuard';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
@@ -17,11 +18,11 @@ import Course from './pages/Course';
 import CreateCourse from './pages/CreateCourse';
 import AddCourseChapter from './pages/AddCourseChapter';
 import MyCourses from './pages/MyCourses';
+import EditQuestion from './pages/EditQuestion';
 import { setUserId } from './store/authSlice';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 import './App.scss';
-import EditQuestion from './pages/EditQuestion/EditQuestion';
 
 function App() {
   const dispatch = useDispatch();
@@ -54,11 +55,11 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <div className="flex justify-center px-10 py-5">
-        <Routes>
+      <Routes>
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/" element={<Footer />}>
           <Route path="/" element={<Home />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
           <Route element={<AuthGuard />}>
             <Route path="/forum">
               <Route path="" element={<Forum />} />
@@ -74,8 +75,8 @@ function App() {
               <Route path="my" element={<MyCourses />} />
             </Route>
           </Route>
-        </Routes>
-      </div>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

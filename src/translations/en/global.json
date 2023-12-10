@@ -5,6 +5,29 @@
     "account": "Account",
     "logout": "Logout"
   },
+  "footer": {
+    "explore": {
+      "title": "Explore",
+      "home": "Home",
+      "aboutUs": "About Us",
+      "courses": "Courses",
+      "pages": "Pages",
+      "blog": "Blog"
+    },
+    "information": {
+      "title": "Information",
+      "privacyPolicy": "Privacy Policy",
+      "membership": "Membership",
+      "purchaseGuide": "Purchase Guide",
+      "termsOfService": "Terms of Service"
+    },
+    "getInTouch": {
+      "title": "Get in touch",
+      "address": "Address: Sylhet, Bangladesh",
+      "phone": "Phone: +880123456789",
+      "email": "Email: example@gmail.com"
+    }
+  },  
   "signIn": {
     "title": "Sign In",
     "underline": "Don’t have an account? ",

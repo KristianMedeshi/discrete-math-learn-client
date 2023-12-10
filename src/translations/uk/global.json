@@ -6,6 +6,29 @@
     "account": "Аккаунт",
     "logout": "Вийти"
   },
+  "footer": {
+    "explore": {
+      "title": "Досліджуйте",
+      "home": "Головна",
+      "aboutUs": "Про нас",
+      "courses": "Курси",
+      "pages": "Сторінки",
+      "blog": "Блог"
+    },
+    "information": {
+      "title": "Інформація",
+      "privacyPolicy": "Політика конфіденційності",
+      "membership": "Членство",
+      "purchaseGuide": "Посібник по покупці",
+      "termsOfService": "Умови обслуговування"
+    },
+    "getInTouch": {
+      "title": "Зв'язатися з нами",
+      "address": "Адреса: Силет, Бангладеш",
+      "phone": "Телефон: +880123456789",
+      "email": "Електронна пошта: example@gmail.com"
+    }
+  },  
   "signIn": {
     "title": "Війти",
     "underline": "Ще не маєте аккаунту? ",
