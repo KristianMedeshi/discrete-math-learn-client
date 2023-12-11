@@ -13,6 +13,7 @@ function Field({
   onFocus,
   readOnly,
   active,
+  className,
 }) {
   return (
     <div className="flex flex-col gap-1 w-full" style={style}>
@@ -24,7 +25,8 @@ function Field({
         htmlFor={name}
         className={`label-borders flex gap-[12px] items-center bg-primary
           ${error ? 'outline-red outline-2' : ''} 
-          ${active ? 'active-focus' : ''}`}
+          ${active ? 'active-focus' : ''}
+          ${className}`}
       >
         {icon}
         <input

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 function Pagination({
   skip, setSkip, limit, resultsLength,
@@ -6,9 +7,15 @@ function Pagination({
   const buttonsCount = 7;
   const currentPage = skip / limit + 1;
   const [pages, setNumbers] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handlePageChange = (page) => {
     setSkip(Math.max(0, limit * (page - 1)));
+    setSearchParams((prev) => {
+      prev.set('page', page);
+      return prev;
+    });
+    console.log(searchParams);
   };
 
   useEffect(() => {

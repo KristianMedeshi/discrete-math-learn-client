@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -23,7 +22,7 @@ function Home() {
   const duration = searchParams.getAll('duration');
   const levels = searchParams.getAll('levels');
   const name = searchParams.get('name');
-  const [skip, setSkip] = useState(0);
+  const [skip, setSkip] = useState(Math.max(0, limit * ((searchParams.get('page') ?? 1) - 1)));
   const [inputMinDuration, setInputMinDuration] = useState(duration[0]);
   const [inputMaxDuration, setInputMaxDuration] = useState(duration[1]);
   const [inputName, setInputName] = useState(name);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Image from '../../components/Image';
 import Pagination from '../../components/Pagination';
@@ -11,7 +11,8 @@ import Loader from '../../components/Loader';
 function MyCourses() {
   const [t] = useTranslation('global');
   const limit = 12;
-  const [skip, setSkip] = useState(0);
+  const [searchParams] = useSearchParams();
+  const [skip, setSkip] = useState(Math.max(0, limit * ((searchParams.get('page') ?? 1) - 1)));
   const userId = useSelector((state) => state.auth.userId);
   const { data } = useQuery([`${userId}/courses/my`, skip], () => getMyCourses({ skip, limit }));
   const { courses, totalCount } = data ?? {};

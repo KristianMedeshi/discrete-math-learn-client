@@ -65,7 +65,7 @@ function CreateCourse() {
       className="page-wrapper w-full gap-3"
     >
       <h1 className="heading-m">{t('courses.add')}</h1>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
         <div className="flex gap-4 w-full">
           <label
             htmlFor="userImage"
@@ -161,13 +161,13 @@ function CreateCourse() {
                 <ul
                   ref={focusTrapRef}
                   className={`absolute z-50 flex flex-col w-full bg-primary 
-                    rounded-md border border-lines ${isOpen ? '' : 'hidden'}`}
+                    rounded-md border overflow-hidden border-lines ${isOpen ? '' : 'hidden'}`}
                 >
                   {levels.map((level) => (
                     <button
                       type="button"
                       key={level}
-                      className="flex gap-1 items-center hover:bg-secondary whitespace-nowrap py-1 px-2"
+                      className="flex gap-1 items-center hover:bg-secondary whitespace-nowrap py-2 px-2"
                       onClick={() => setLevel(level)}
                     >
                       {t(`courses.${level}`)}
