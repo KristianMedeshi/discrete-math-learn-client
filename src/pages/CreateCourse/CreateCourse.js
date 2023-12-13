@@ -11,7 +11,7 @@ import { convertToBase64 } from '../../utils/helpers';
 import useDropdown from '../../hooks/useDropdown';
 import levels from '../../constants/levels';
 import { createCourse } from '../../utils/coursesApi';
-import { emptyEditorRegex, instructorsRegex, numberRegex } from '../../constants/regex';
+import { emptyEditorRegex, numberRegex } from '../../constants/regex';
 import './CreateCourse.scss';
 
 function CreateCourse() {
@@ -56,7 +56,17 @@ function CreateCourse() {
 
   const onSubmit = (data) => {
     data.instructors = data.instructors.split(',').map((item) => item.trim());
-    createCourseMutation.mutate(data);
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      if (key !== 'image') {
+        formData.append(key, value);
+      }
+    });
+    const image = data.image?.[0];
+    if (image) {
+      formData.append('image', image);
+    }
+    createCourseMutation.mutate(formData);
   };
 
   return (
@@ -100,10 +110,6 @@ function CreateCourse() {
                 placeholder={t('courses.instructorsPlaceholder')}
                 registerReturn={register('instructors', {
                   required: t('emptyFieldError'),
-                  pattern: {
-                    value: instructorsRegex,
-                    message: t('invalidFormatError'),
-                  },
                 })}
               />
             </div>
