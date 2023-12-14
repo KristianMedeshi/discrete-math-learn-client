@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import { Link, useSearchParams } from 'react-router-dom';
@@ -7,6 +6,7 @@ import { useSelector } from 'react-redux';
 import Slider from 'rc-slider';
 import Loader from '../../components/Loader';
 import Pagination from '../../components/Pagination';
+import Image from '../../components/Image';
 import { getCourses } from '../../utils/coursesApi';
 import 'rc-slider/assets/index.css';
 import './Home.scss';
@@ -23,7 +23,7 @@ function Home() {
   const duration = searchParams.getAll('duration');
   const levels = searchParams.getAll('levels');
   const name = searchParams.get('name');
-  const [skip, setSkip] = useState(0);
+  const [skip, setSkip] = useState(Math.max(0, limit * ((searchParams.get('page') ?? 1) - 1)));
   const [inputMinDuration, setInputMinDuration] = useState(duration[0]);
   const [inputMaxDuration, setInputMaxDuration] = useState(duration[1]);
   const [inputName, setInputName] = useState(name);
@@ -218,7 +218,7 @@ function Home() {
                   to={`/courses/${course._id}`}
                   className="flex items-center gap-6 mx-10 hover:bg-secondary"
                 >
-                  <img src={course.image} alt="" />
+                  <Image imageSrc={course.image} className="!w-[300px] !h-[168px]" />
                   <div>
                     <h5 className="flex gap-5 justify-between heading-xs">
                       <p>{course.name}</p>

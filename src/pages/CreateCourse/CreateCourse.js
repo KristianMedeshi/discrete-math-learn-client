@@ -11,7 +11,7 @@ import { convertToBase64 } from '../../utils/helpers';
 import useDropdown from '../../hooks/useDropdown';
 import levels from '../../constants/levels';
 import { createCourse } from '../../utils/coursesApi';
-import { emptyEditorRegex, instructorsRegex, numberRegex } from '../../constants/regex';
+import { emptyEditorRegex, numberRegex } from '../../constants/regex';
 import './CreateCourse.scss';
 
 function CreateCourse() {
@@ -56,7 +56,17 @@ function CreateCourse() {
 
   const onSubmit = (data) => {
     data.instructors = data.instructors.split(',').map((item) => item.trim());
-    createCourseMutation.mutate(data);
+    const formData = new FormData();
+    Object.entries(data).forEach(([key, value]) => {
+      if (key !== 'image') {
+        formData.append(key, value);
+      }
+    });
+    const image = data.image?.[0];
+    if (image) {
+      formData.append('image', image);
+    }
+    createCourseMutation.mutate(formData);
   };
 
   return (
@@ -65,7 +75,7 @@ function CreateCourse() {
       className="page-wrapper w-full gap-3"
     >
       <h1 className="heading-m">{t('courses.add')}</h1>
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-4">
         <div className="flex gap-4 w-full">
           <label
             htmlFor="userImage"
@@ -100,10 +110,6 @@ function CreateCourse() {
                 placeholder={t('courses.instructorsPlaceholder')}
                 registerReturn={register('instructors', {
                   required: t('emptyFieldError'),
-                  pattern: {
-                    value: instructorsRegex,
-                    message: t('invalidFormatError'),
-                  },
                 })}
               />
             </div>
@@ -161,13 +167,13 @@ function CreateCourse() {
                 <ul
                   ref={focusTrapRef}
                   className={`absolute z-50 flex flex-col w-full bg-primary 
-                    rounded-md border border-lines ${isOpen ? '' : 'hidden'}`}
+                    rounded-md border overflow-hidden border-lines ${isOpen ? '' : 'hidden'}`}
                 >
                   {levels.map((level) => (
                     <button
                       type="button"
                       key={level}
-                      className="flex gap-1 items-center hover:bg-secondary whitespace-nowrap py-1 px-2"
+                      className="flex gap-1 items-center hover:bg-secondary whitespace-nowrap py-2 px-2"
                       onClick={() => setLevel(level)}
                     >
                       {t(`courses.${level}`)}
