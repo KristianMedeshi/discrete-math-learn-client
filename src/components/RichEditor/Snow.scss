@@ -8,11 +8,21 @@
     /* transition: background-color var(--duration) ease-in-out; */
     transition: border-width 0s, border-color var(--duration) ease-in-out, background-color var(--duration) ease-in-out;
   }
-  
-  .ql-snow .ql-editor {
-    overflow-y: scroll;
-    resize: vertical;
-    outline: none !important;
+
+  .ql-snow {
+    .ql-editor {
+      overflow-y: scroll;
+      resize: vertical;
+      outline: none !important;
+    }
+    
+    .ql-picker {
+      color: var(--color-theme-text) !important;
+    }
+
+    .ql-picker-options {
+      background-color: var(--color-theme-secondary) !important;
+    }
   }
 
   .ql-editor.ql-blank::before {
