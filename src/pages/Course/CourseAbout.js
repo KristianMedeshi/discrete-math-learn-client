@@ -4,6 +4,7 @@ import ReactQuill from 'react-quill';
 import useModal from '../../hooks/useModal';
 import ModalContainer from '../../components/ModalContainer';
 import BuyCourseModal from '../../components/BuyCourseModal';
+import Image from '../../components/Image';
 
 function CourseAbout({ course }) {
   const { modalOpen, open, close } = useModal();
@@ -12,7 +13,7 @@ function CourseAbout({ course }) {
   return (
     <div className="flex flex-col gap-5 w-full">
       <div className="flex gap-5 w-full">
-        <img src={course.image} alt="" className="w-[300px] h-[168px]" />
+        <Image imageSrc={course.image} className="!w-[300px] !h-[168px]" />
         <div className="flex flex-col">
           <div className="flex items-center justify-between w-full gap-10">
             <h1 className="heading-m">{course.name}</h1>
