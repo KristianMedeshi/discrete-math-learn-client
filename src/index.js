@@ -6,9 +6,9 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import i18next from 'i18next';
 import App from './App';
 import globalEn from './translations/en/global.json';
-import globalUk from './translations/uk/global.json';
+import globalUa from './translations/ua/global.json';
 import tagsEn from './translations/en/tags.json';
-import tagsUk from './translations/uk/tags.json';
+import tagsUa from './translations/ua/tags.json';
 import store from './store';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
@@ -21,9 +21,9 @@ i18next.init({
       global: globalEn,
       tags: tagsEn,
     },
-    uk: {
-      global: globalUk,
-      tags: tagsUk,
+    ua: {
+      global: globalUa,
+      tags: tagsUa,
     },
   },
 });
