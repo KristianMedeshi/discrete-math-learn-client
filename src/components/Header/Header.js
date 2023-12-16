@@ -85,11 +85,11 @@ function Header() {
                 <div className="divider-x" />
                 <button
                   type="button"
-                  onClick={() => handleChangeLanguage('uk')}
+                  onClick={() => handleChangeLanguage('ua')}
                   className="menu-option"
                 >
                   <p>Ukraine</p>
-                  <p>uk</p>
+                  <p>ua</p>
                 </button>
               </motion.div>
             )}

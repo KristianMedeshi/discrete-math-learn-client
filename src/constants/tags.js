@@ -51,7 +51,7 @@ export default {
     { key: 'arithmetical logic', value: 'arithmetical logic' },
     { key: 'structural induction', value: 'structural induction' },
   ],
-  uk: [
+  ua: [
     { key: 'пропозиційна логіка', value: 'propositional logic' },
     { key: 'логіка предикатів', value: 'predicate logic' },
     { key: 'теорія множин', value: 'set theory' },
