@@ -16,13 +16,17 @@ import dropIn from '../../constants/dropInAnimation';
 function BuyCourseModal({ isOpen, course, handleClose }) {
   const [t] = useTranslation('global');
   const {
-    register, reset, formState: { errors }, handleSubmit,
+    register, formState: { errors }, handleSubmit, getFieldState, setValue,
   } = useForm({ shouldFocusError: false });
 
   const userId = useSelector((state) => state.auth.userId);
   const { isLoading } = useQuery(`${userId}/info`, getMyInfo, {
     onSuccess: (data) => {
-      reset(data?.user, { keepErrors: true, keepDirtyValues: true });
+      ['cardNumber', 'cardCvv', 'cardExpiry'].forEach((key) => {
+        if (!getFieldState(key).isDirty) {
+          setValue(key, data?.user[key], { shouldDirty: true });
+        }
+      });
     },
   });
 
