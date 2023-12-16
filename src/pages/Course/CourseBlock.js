@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
@@ -15,19 +15,25 @@ function CourseBlock({ id }) {
   const userId = useSelector((state) => state.auth.userId);
   const { data, isLoading } = useQuery(`${userId}/${courseId}/${id}`, () => getCourseBlock(courseId, id));
   const { block } = data || {};
+  const [message, setMessage] = useState('');
 
   const { register, control, handleSubmit } = useForm({ shouldFocusError: false });
 
   const queryClient = useQueryClient();
   const markCourseMutation = useMutation((data) => markAsCompleted(block._id, data), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(`courses/${courseId}`);
+    onSuccess: (data) => {
+      setMessage(data?.message);
+      queryClient.invalidateQueries(`${userId}/courses/${courseId}`);
     },
   });
 
   const onSubmit = (data) => {
     markCourseMutation.mutate(data);
   };
+
+  useEffect(() => {
+    setMessage('');
+  }, [id]);
 
   if (isLoading) {
     return <div className="flex w-full h-full items-center justify-center"><Loader /></div>;
@@ -44,9 +50,22 @@ function CourseBlock({ id }) {
         modules={{ toolbar: false }}
       />
       <div className="divider-x" hidden={!block?.tests.length} />
+      {block?.attachments.map((file) => (
+        <a
+          target="_black"
+          href={file.path}
+          rel="noreferrer"
+          key={file.path}
+          className="bg-secondary border border-lines
+          px-2 py-1 rounded-sm whitespace-nowrap h-fit w-fit hover:underline"
+        >
+          {file.originalName}
+        </a>
+      ))}
+      <div className="divider-x" hidden={block.isPassed} />
       {block?.tests.map((test, index) => (
         <div
-          key={test}
+          key={test.questionText}
           className="bg-secondary p-4 rounded-md"
         >
           <ReactQuill
@@ -98,18 +117,6 @@ function CourseBlock({ id }) {
         </div>
       ))}
       <div className="divider-x" hidden={!block?.attachments.length} />
-      {block?.attachments.map((file) => (
-        <a
-          target="_black"
-          href={file.path}
-          rel="noreferrer"
-          className="bg-secondary border border-lines
-          px-2 py-1 rounded-sm whitespace-nowrap h-fit w-fit hover:underline"
-        >
-          {file.originalName}
-        </a>
-      ))}
-      <div className="divider-x" hidden={block.isPassed} />
       <button
         type="submit"
         hidden={block.isPassed}
@@ -118,6 +125,7 @@ function CourseBlock({ id }) {
       >
         {t('courses.markAsCompleted')}
       </button>
+      <p>{message}</p>
     </form>
   );
 }
