@@ -49,7 +49,7 @@ function CourseBlock({ id }) {
         readOnly
         modules={{ toolbar: false }}
       />
-      <div className="divider-x" hidden={!block?.tests.length} />
+      <div className="divider-x" hidden={!block?.attachments.length} />
       {block?.attachments.map((file) => (
         <a
           target="_black"
@@ -62,7 +62,7 @@ function CourseBlock({ id }) {
           {file.originalName}
         </a>
       ))}
-      <div className="divider-x" hidden={block.isPassed} />
+      <div className="divider-x" hidden={!block?.tests.length} />
       {block?.tests.map((test, index) => (
         <div
           key={test.questionText}
@@ -116,7 +116,7 @@ function CourseBlock({ id }) {
           <Field registerReturn={register(`answersTasks.${index}`)} />
         </div>
       ))}
-      <div className="divider-x" hidden={!block?.attachments.length} />
+      <div className="divider-x" hidden={block.isPassed} />
       <button
         type="submit"
         hidden={block.isPassed}
