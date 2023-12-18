@@ -98,6 +98,38 @@ function AddCourseChapter() {
       <div className="divider-x" />
       <div className="flex flex-col gap-1 w-full">
         <small className="body-text-s">
+          {t('courses.attachments')}
+          :
+        </small>
+        <div className="flex gap-3 flex-wrap">
+          {selectedAttachments.map((attachment) => (
+            <button
+              type="button"
+              className="flex gap-1 items-center bg-secondary border border-lines
+              whitespace-nowrap py-1 px-2 rounded-sm w-fit"
+              onClick={() => handleAttachmentRemove(attachment)}
+            >
+              {attachment.name}
+              <AiOutlineClose />
+            </button>
+          ))}
+        </div>
+        <label
+          htmlFor="attachmentsInput"
+          className="button-primary w-fit px-8 cursor-pointer self-end"
+        >
+          <input
+            id="attachmentsInput"
+            type="file"
+            hidden
+            onChange={handleAttachmentAdd}
+          />
+          {t('courses.attachFile')}
+        </label>
+      </div>
+      <div className="divider-x" />
+      <div className="flex flex-col gap-1 w-full">
+        <small className="body-text-s">
           {t('courses.tasks')}
           :
         </small>
@@ -196,37 +228,6 @@ function AddCourseChapter() {
             {t('courses.addTest')}
           </button>
         </div>
-      </div>
-      <div className="divider-x" />
-      <div className="flex flex-col gap-1 w-full">
-        <small className="body-text-s">
-          Attachments:
-        </small>
-        <div className="flex gap-3 flex-wrap">
-          {selectedAttachments.map((attachment) => (
-            <button
-              type="button"
-              className="flex gap-1 items-center bg-secondary border border-lines
-              whitespace-nowrap py-1 px-2 rounded-sm w-fit"
-              onClick={() => handleAttachmentRemove(attachment)}
-            >
-              {attachment.name}
-              <AiOutlineClose />
-            </button>
-          ))}
-        </div>
-        <label
-          htmlFor="attachmentsInput"
-          className="button-primary w-fit px-8 cursor-pointer self-end"
-        >
-          <input
-            id="attachmentsInput"
-            type="file"
-            hidden
-            onChange={handleAttachmentAdd}
-          />
-          {t('courses.attachFile')}
-        </label>
       </div>
       <div className="divider-x" />
       <button
