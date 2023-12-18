@@ -2,6 +2,7 @@
   "header": {
     "signIn": "Sign In",
     "signUp": "Sign Up",
+    "myCourses": "My courses",
     "account": "Account",
     "logout": "Logout"
   },
@@ -57,7 +58,7 @@
     "buy": "Buy",
     "tasks": "Tasks",
     "tests": "Tests",
-    "attachements": "Attachements",
+    "attachments": "Attachments",
     "about": "About",
     "courses": "Courses",
     "add": "Add course",
