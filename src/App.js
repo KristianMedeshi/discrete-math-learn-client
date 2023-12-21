@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  BrowserRouter, Route, Routes,
+  Route, Routes,
 } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import Header from './components/Header';
@@ -53,7 +53,7 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <>
       <Header />
       <Routes>
         <Route path="/sign-in" element={<SignIn />} />
@@ -77,7 +77,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { I18nextProvider } from 'react-i18next';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -36,7 +37,9 @@ root.render(
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <I18nextProvider i18n={i18next}>
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </I18nextProvider>
       </QueryClientProvider>
     </Provider>

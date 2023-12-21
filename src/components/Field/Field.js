@@ -1,4 +1,5 @@
 function Field({
+  id,
   style,
   inputClassName,
   name,
@@ -22,7 +23,7 @@ function Field({
         {name && ':'}
       </small>
       <label
-        htmlFor={name}
+        htmlFor={id ?? name}
         className={`label-borders flex gap-[12px] items-center bg-primary
           ${error ? 'outline-red outline-2' : ''} 
           ${active ? 'active-focus' : ''}
@@ -30,7 +31,7 @@ function Field({
       >
         {icon}
         <input
-          id={name}
+          id={id ?? name}
           type={type}
           className={`w-full ${inputClassName}`}
           onKeyDown={onKeyDown}
@@ -42,7 +43,7 @@ function Field({
         />
         <div className="ml-auto">{after}</div>
       </label>
-      <span className="body-text-s !text-red h-[8px] whitespace-nowrap">
+      <span className="body-text-s !text-red h-[8px]">
         {error?.message}
         {' '}
       </span>
