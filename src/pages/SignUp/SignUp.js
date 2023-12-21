@@ -47,7 +47,7 @@ function SignUp() {
             name={t('firstName')}
             type="text"
             placeholder={t('firstNamePlaceholder')}
-            error={errors?.name?.first}
+            error={errors?.firstName}
             registerReturn={register('firstName', {
               required: t('emptyFieldError'),
               pattern: {
@@ -55,12 +55,13 @@ function SignUp() {
                 message: t('lettersError'),
               },
             })}
+            id="firstName"
           />
           <Field
             name={t('lastName')}
             type="text"
             placeholder={t('lastNamePlaceholder')}
-            error={errors?.name?.last}
+            error={errors?.lastName}
             registerReturn={register('lastName', {
               required: t('emptyFieldError'),
               pattern: {
@@ -68,6 +69,7 @@ function SignUp() {
                 message: t('lettersError'),
               },
             })}
+            id="lastName"
           />
           <Field
             style={{ gridColumn: '-1 / 1' }}
@@ -83,6 +85,7 @@ function SignUp() {
                 message: t('invalidFormatError'),
               },
             })}
+            id="email"
           />
           <Field
             style={{ gridColumn: '-1 / 1' }}
@@ -113,11 +116,12 @@ function SignUp() {
                   className="cursor-pointer"
                 />
               )}
-
+            id="password"
           />
         </div>
         <p className="w-full body-text-s text-red">{authError}</p>
         <button
+          id="signUpSubmit"
           type="submit"
           className="button-primary text-center w-full"
         >

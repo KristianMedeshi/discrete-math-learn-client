@@ -62,6 +62,7 @@ function SignIn() {
                 message: t('invalidFormatError'),
               },
             })}
+            id="email"
           />
           <Field
             style={{ gridColumn: '-1 / 1' }}
@@ -92,10 +93,12 @@ function SignIn() {
                   className="cursor-pointer"
                 />
               )}
+            id="password"
           />
         </div>
         <p className="w-full body-text-s text-red">{authError}</p>
         <button
+          id="signInSubmit"
           type="submit"
           className="button-primary w-full"
         >
