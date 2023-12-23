@@ -65,12 +65,12 @@ function Account() {
   const onSubmit = (data) => {
     data = removeEmpty(data);
     const formData = new FormData();
-    if (typeof data.image === 'string') {
-      delete data.image;
-    }
     Object.entries(data).forEach(([key, value]) => {
       formData.append(key, value);
     });
+    if (image) {
+      formData.append('image', image[0]);
+    }
     updateAccountMutation.mutate(formData);
   };
 
