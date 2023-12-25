@@ -88,7 +88,7 @@
     "lecturePlaceholder": "Lecture",
     "chapterTitlePlaceholder": "Your chapter name",
     "question": "Question",
-    "correctIndexOption": "Correct option"
+    "correctOptionIndex": "Correct option"
   },
   "edit": "Edit",
   "delete": "Delete",

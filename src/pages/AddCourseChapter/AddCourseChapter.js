@@ -20,6 +20,7 @@ function AddCourseChapter() {
       tasks: [],
       tests: [],
     },
+    shouldFocusError: false,
   });
 
   const {
@@ -45,6 +46,7 @@ function AddCourseChapter() {
   };
 
   const navigate = useNavigate();
+  // eslint-disable-next-line no-unused-vars
   const createCourseChapterMutation = useMutation(async (data) => createCourseChapter(id, data), {
     onSuccess: (data) => {
       navigate(`/courses/${id}?block=${data.id}`);
@@ -62,6 +64,9 @@ function AddCourseChapter() {
   };
 
   const onSubmit = (data) => {
+    data.tests?.forEach((v) => {
+      v.correctOptionIndex -= 1;
+    });
     const formData = new FormData();
     formData.append('jsonData', JSON.stringify(data));
     selectedAttachments.forEach((file) => {
@@ -177,7 +182,7 @@ function AddCourseChapter() {
         <div className="flex flex-col gap-3">
           {testsFields.map((test, index) => (
             <div
-              className="bg-secondary p-5 rounded-md relative"
+              className="flex flex-col gap-3 bg-secondary p-5 rounded-md relative"
               key={`${JSON.stringify(test)}${index}`}
             >
               <AiOutlineClose
@@ -196,27 +201,41 @@ function AddCourseChapter() {
               <Field
                 icon={1}
                 error={errors.tests?.[index]?.options?.[0]}
-                registerReturn={register(`tests.${index}.options.0`)}
+                registerReturn={register(`tests.${index}.options.0`, {
+                  required: t('emptyFieldError'),
+                })}
               />
               <Field
                 icon={2}
                 error={errors.tests?.[index]?.options?.[1]}
-                registerReturn={register(`tests.${index}.options.1`)}
+                registerReturn={register(`tests.${index}.options.1`, {
+                  required: t('emptyFieldError'),
+                })}
               />
               <Field
                 icon={3}
                 error={errors.tests?.[index]?.options?.[2]}
-                registerReturn={register(`tests.${index}.options.2`)}
+                registerReturn={register(`tests.${index}.options.2`, {
+                  required: t('emptyFieldError'),
+                })}
               />
               <Field
                 icon={4}
                 error={errors.tests?.[index]?.options?.[3]}
-                registerReturn={register(`tests.${index}.options.3`)}
+                registerReturn={register(`tests.${index}.options.3`, {
+                  required: t('emptyFieldError'),
+                })}
               />
               <Field
-                name={t('courses.correctIndexOption')}
-                error={errors.tests?.[index]?.answer}
-                registerReturn={register(`tests.${index}.correctIndexOption`)}
+                name={t('courses.correctOptionIndex')}
+                error={errors.tests?.[index]?.correctOptionIndex}
+                registerReturn={register(`tests.${index}.correctOptionIndex`, {
+                  required: t('emptyFieldError'),
+                  pattern: {
+                    value: /[1-4]/,
+                    message: t('invalidFormatError'),
+                  },
+                })}
               />
             </div>
           ))}
