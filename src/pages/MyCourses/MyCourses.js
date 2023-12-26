@@ -48,7 +48,7 @@ function MyCourses() {
                   <div className="flex gap-2 w-full justify-between pb-2">
                     <p className="body-text-m">{course.name}</p>
                     <small className="body-text-s">
-                      {course.total ? (100 * course.passed) / course.total : 100}
+                      {course.total ? Math.round((100 * course.passed) / course.total) : 100}
                       %
                     </small>
                   </div>
